@@ -1,0 +1,135 @@
+name: Microsoft Office APIs
+description: A collection of APIs for Microsoft Office applications and services
+image: https://www.microsoft.com/en-us/microsoft-365/blog/wp-content/uploads/sites/2/2020/04/Microsoft-365-logo.png
+url: https://www.microsoft.com/en-us/microsoft-365
+created: '2024'
+modified: '2024'
+specificationVersion: '0.18'
+tags:
+- office
+- productivity
+- documents
+- collaboration
+- microsoft
+apis:
+- name: Microsoft Graph API
+  description: Unified API endpoint for accessing Microsoft 365 services including Office applications, OneDrive, Outlook, and more
+  image: https://docs.microsoft.com/en-us/graph/images/microsoft-graph.png
+  humanUrl: https://developer.microsoft.com/en-us/graph
+  baseUrl: https://graph.microsoft.com/v1.0
+  tags:
+  - microsoft-graph
+  - office-365
+  - unified-api
+  properties:
+  - type: Documentation
+    url: https://docs.microsoft.com/en-us/graph/overview
+  - type: OpenAPI
+    url: https://raw.githubusercontent.com/microsoftgraph/microsoft-graph-openapi/master/openapi/v1.0/openapi.yaml
+  - type: Authentication
+    url: https://docs.microsoft.com/en-us/graph/auth/
+  - type: Pricing
+    url: https://azure.microsoft.com/en-us/pricing/details/active-directory/
+  - type: SDKs
+    url: https://docs.microsoft.com/en-us/graph/sdks/sdks-overview
+- name: Word API
+  description: API for interacting with Microsoft Word documents, including reading, writing, and formatting content
+  humanUrl: https://developer.microsoft.com/en-us/office
+  baseUrl: https://graph.microsoft.com/v1.0
+  tags:
+  - word
+  - documents
+  - word-processing
+  properties:
+  - type: Documentation
+    url: https://docs.microsoft.com/en-us/office/dev/add-ins/reference/overview/word-add-ins-reference-overview
+  - type: JavaScript API
+    url: https://docs.microsoft.com/en-us/javascript/api/word
+- name: Excel API
+  description: API for working with Excel workbooks, worksheets, ranges, charts, and tables
+  humanUrl: https://developer.microsoft.com/en-us/office
+  baseUrl: https://graph.microsoft.com/v1.0
+  tags:
+  - excel
+  - spreadsheets
+  - data-analysis
+  properties:
+  - type: Documentation
+    url: https://docs.microsoft.com/en-us/office/dev/add-ins/reference/overview/excel-add-ins-reference-overview
+  - type: JavaScript API
+    url: https://docs.microsoft.com/en-us/javascript/api/excel
+- name: PowerPoint API
+  description: API for creating and manipulating PowerPoint presentations, slides, and content
+  humanUrl: https://developer.microsoft.com/en-us/office
+  baseUrl: https://graph.microsoft.com/v1.0
+  tags:
+  - powerpoint
+  - presentations
+  - slides
+  properties:
+  - type: Documentation
+    url: https://docs.microsoft.com/en-us/office/dev/add-ins/reference/overview/powerpoint-add-ins-reference-overview
+  - type: JavaScript API
+    url: https://docs.microsoft.com/en-us/javascript/api/powerpoint
+- name: Outlook Mail API
+  description: API for accessing and managing email, calendar, contacts, and tasks in Outlook
+  humanUrl: https://developer.microsoft.com/en-us/graph
+  baseUrl: https://graph.microsoft.com/v1.0
+  tags:
+  - outlook
+  - email
+  - calendar
+  - contacts
+  properties:
+  - type: Documentation
+    url: https://docs.microsoft.com/en-us/graph/api/resources/mail-api-overview
+  - type: Tutorials
+    url: https://docs.microsoft.com/en-us/graph/tutorials
+- name: OneDrive API
+  description: API for accessing files and folders stored in OneDrive and SharePoint
+  humanUrl: https://developer.microsoft.com/en-us/onedrive
+  baseUrl: https://graph.microsoft.com/v1.0
+  tags:
+  - onedrive
+  - storage
+  - files
+  - cloud-storage
+  properties:
+  - type: Documentation
+    url: https://docs.microsoft.com/en-us/graph/api/resources/onedrive
+  - type: Getting Started
+    url: https://docs.microsoft.com/en-us/onedrive/developer/
+- name: Teams API
+  description: API for integrating with Microsoft Teams, including messaging, channels, and collaboration features
+  humanUrl: https://developer.microsoft.com/en-us/microsoft-teams
+  baseUrl: https://graph.microsoft.com/v1.0
+  tags:
+  - teams
+  - collaboration
+  - chat
+  - meetings
+  properties:
+  - type: Documentation
+    url: https://docs.microsoft.com/en-us/graph/api/resources/teams-api-overview
+  - type: Bot Framework
+    url: https://docs.microsoft.com/en-us/microsoftteams/platform/bots/what-are-bots
+common:
+- type: Portal
+  url: https://developer.microsoft.com/en-us/microsoft-365
+- type: Authentication
+  url: https://docs.microsoft.com/en-us/azure/active-directory/develop/
+- type: Blog
+  url: https://developer.microsoft.com/en-us/microsoft-365/blogs/
+- type: Support
+  url: https://docs.microsoft.com/en-us/answers/products/
+- type: Terms of Service
+  url: https://docs.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+- type: Privacy Policy
+  url: https://privacy.microsoft.com/en-us/privacystatement
+- type: Status
+  url: https://status.dev.microsoft.com/
+maintainers:
+- name: Microsoft
+  email:
+  - email protected
+  url: https://www.microsoft.com
