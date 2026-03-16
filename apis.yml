@@ -1,5 +1,5 @@
 aid: microsoft-office
-name: Microsoft Office APIs
+name: Microsoft Office
 description: >-
   A collection of APIs for Microsoft Office applications and services,
   providing programmatic access to Word, Excel, PowerPoint, Outlook,
