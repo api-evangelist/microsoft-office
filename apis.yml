@@ -7,13 +7,12 @@ description: >-
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
+  - Collaboration
+  - Documents
+  - Microsoft
   - Office
   - Productivity
-  - Documents
-  - Collaboration
-  - Microsoft
-url: 
-  https://raw.githubusercontent.com/api-evangelist/microsoft-office/refs/heads/main/apis.yml
+url: https://raw.githubusercontent.com/api-evangelist/microsoft-office/refs/heads/main/apis.yml
 created: '2024-01-01'
 modified: '2026-03-16'
 specificationVersion: '0.19'
@@ -23,8 +22,7 @@ apis:
     description: >-
       Unified API endpoint for accessing Microsoft 365 services including Office applications,
       OneDrive, Outlook, and more.
-    image: 
-      https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     humanURL: https://developer.microsoft.com/en-us/graph
     baseURL: https://graph.microsoft.com/v1.0
     tags:
@@ -35,8 +33,7 @@ apis:
       - type: Documentation
         url: https://learn.microsoft.com/en-us/graph/overview
       - type: OpenAPI
-        url: 
-          https://raw.githubusercontent.com/microsoftgraph/microsoft-graph-openapi/master/openapi/v1.0/openapi.yaml
+        url: https://raw.githubusercontent.com/microsoftgraph/microsoft-graph-openapi/master/openapi/v1.0/openapi.yaml
       - type: Authentication
         url: https://learn.microsoft.com/en-us/graph/auth/
       - type: Pricing
@@ -48,44 +45,39 @@ apis:
     description: >-
       API for interacting with Microsoft Word documents, including reading, writing,
       and formatting content.
-    image: 
-      https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     humanURL: https://learn.microsoft.com/en-us/javascript/api/word
     baseURL: https://graph.microsoft.com/v1.0
     tags:
-      - Word
       - Documents
+      - Word
       - Word Processing
     properties:
       - type: Documentation
-        url: 
-          https://learn.microsoft.com/en-us/office/dev/add-ins/reference/overview/word-add-ins-reference-overview
+        url: https://learn.microsoft.com/en-us/office/dev/add-ins/reference/overview/word-add-ins-reference-overview
       - type: Reference
         url: https://learn.microsoft.com/en-us/javascript/api/word
   - aid: microsoft-office:excel-api
     name: Excel API
     description: >-
       API for working with Excel workbooks, worksheets, ranges, charts, and tables.
-    image: 
-      https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     humanURL: https://learn.microsoft.com/en-us/javascript/api/excel
     baseURL: https://graph.microsoft.com/v1.0
     tags:
+      - Data Analysis
       - Excel
       - Spreadsheets
-      - Data Analysis
     properties:
       - type: Documentation
-        url: 
-          https://learn.microsoft.com/en-us/office/dev/add-ins/reference/overview/excel-add-ins-reference-overview
+        url: https://learn.microsoft.com/en-us/office/dev/add-ins/reference/overview/excel-add-ins-reference-overview
       - type: Reference
         url: https://learn.microsoft.com/en-us/javascript/api/excel
   - aid: microsoft-office:powerpoint-api
     name: PowerPoint API
     description: >-
       API for creating and manipulating PowerPoint presentations, slides, and content.
-    image: 
-      https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     humanURL: https://learn.microsoft.com/en-us/javascript/api/powerpoint
     baseURL: https://graph.microsoft.com/v1.0
     tags:
@@ -94,43 +86,38 @@ apis:
       - Slides
     properties:
       - type: Documentation
-        url: 
-          https://learn.microsoft.com/en-us/office/dev/add-ins/reference/overview/powerpoint-add-ins-reference-overview
+        url: https://learn.microsoft.com/en-us/office/dev/add-ins/reference/overview/powerpoint-add-ins-reference-overview
       - type: Reference
         url: https://learn.microsoft.com/en-us/javascript/api/powerpoint
   - aid: microsoft-office:outlook-mail-api
     name: Outlook Mail API
     description: >-
       API for accessing and managing email, calendar, contacts, and tasks in Outlook.
-    image: 
-      https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
-    humanURL: 
-      https://learn.microsoft.com/en-us/graph/api/resources/mail-api-overview
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://learn.microsoft.com/en-us/graph/api/resources/mail-api-overview
     baseURL: https://graph.microsoft.com/v1.0
     tags:
-      - Outlook
-      - Email
       - Calendar
       - Contacts
+      - Email
+      - Outlook
     properties:
       - type: Documentation
-        url: 
-          https://learn.microsoft.com/en-us/graph/api/resources/mail-api-overview
+        url: https://learn.microsoft.com/en-us/graph/api/resources/mail-api-overview
       - type: Getting Started
         url: https://learn.microsoft.com/en-us/graph/tutorials
   - aid: microsoft-office:onedrive-api
     name: OneDrive API
     description: >-
       API for accessing files and folders stored in OneDrive and SharePoint.
-    image: 
-      https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     humanURL: https://learn.microsoft.com/en-us/graph/api/resources/onedrive
     baseURL: https://graph.microsoft.com/v1.0
     tags:
+      - Cloud Storage
+      - Files
       - OneDrive
       - Storage
-      - Files
-      - Cloud Storage
     properties:
       - type: Documentation
         url: https://learn.microsoft.com/en-us/graph/api/resources/onedrive
@@ -141,20 +128,17 @@ apis:
     description: >-
       API for integrating with Microsoft Teams, including messaging, channels, and
       collaboration features.
-    image: 
-      https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
-    humanURL: 
-      https://learn.microsoft.com/en-us/graph/api/resources/teams-api-overview
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://learn.microsoft.com/en-us/graph/api/resources/teams-api-overview
     baseURL: https://graph.microsoft.com/v1.0
     tags:
-      - Teams
-      - Collaboration
       - Chat
+      - Collaboration
       - Meetings
+      - Teams
     properties:
       - type: Documentation
-        url: 
-          https://learn.microsoft.com/en-us/graph/api/resources/teams-api-overview
+        url: https://learn.microsoft.com/en-us/graph/api/resources/teams-api-overview
 common:
   - type: Portal
     url: https://developer.microsoft.com/en-us/microsoft-365
