@@ -2,7 +2,11 @@
 
 A collection of APIs for Microsoft Office applications and services, providing programmatic access to Word, Excel, PowerPoint, Outlook, OneDrive, and Teams through Microsoft Graph and Office JavaScript APIs.
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/microsoft-office/refs/heads/main/apis.yml)
+**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/microsoft-office/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/microsoft-office/refs/heads/main/apis.yml)
+
+## Scope
+
+- **Type:** Index
 
 ## Tags
 
@@ -20,11 +24,11 @@ A collection of APIs for Microsoft Office applications and services, providing p
 ## APIs
 
 ### Microsoft Graph API
+
 Unified API endpoint for accessing Microsoft 365 services including Office applications, OneDrive, Outlook, and more.
 
-**Human URL:** [https://developer.microsoft.com/en-us/graph](https://developer.microsoft.com/en-us/graph)
-
-**Base URL:** https://graph.microsoft.com/v1.0
+- **Human URL:** [https://developer.microsoft.com/en-us/graph](https://developer.microsoft.com/en-us/graph)
+- **Base URL:** `https://graph.microsoft.com/v1.0`
 
 #### Tags
 
@@ -35,17 +39,19 @@ Unified API endpoint for accessing Microsoft 365 services including Office appli
 #### Properties
 
 - [Documentation](https://learn.microsoft.com/en-us/graph/overview)
-- [OpenAPI](https://raw.githubusercontent.com/microsoftgraph/microsoft-graph-openapi/master/openapi/v1.0/openapi.yaml)
+- [OpenAPI](https://raw.githubusercontent.com/microsoftgraph/microsoft-graph-openapi/master/openapi/v1.0/openapi.yaml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
 - [Authentication](https://learn.microsoft.com/en-us/graph/auth/)
 - [Pricing](https://azure.microsoft.com/en-us/pricing/details/active-directory/)
-- [SDKs](https://learn.microsoft.com/en-us/graph/sdks/sdks-overview)
+- [S D Ks](https://learn.microsoft.com/en-us/graph/sdks/sdks-overview)
+- [Postman Collection](collections/microsoft-office.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/microsoft-office.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### Word API
+
 API for interacting with Microsoft Word documents, including reading, writing, and formatting content.
 
-**Human URL:** [https://learn.microsoft.com/en-us/javascript/api/word](https://learn.microsoft.com/en-us/javascript/api/word)
-
-**Base URL:** https://graph.microsoft.com/v1.0
+- **Human URL:** [https://learn.microsoft.com/en-us/javascript/api/word](https://learn.microsoft.com/en-us/javascript/api/word)
+- **Base URL:** `https://graph.microsoft.com/v1.0`
 
 #### Tags
 
@@ -57,13 +63,15 @@ API for interacting with Microsoft Word documents, including reading, writing, a
 
 - [Documentation](https://learn.microsoft.com/en-us/office/dev/add-ins/reference/overview/word-add-ins-reference-overview)
 - [Reference](https://learn.microsoft.com/en-us/javascript/api/word)
+- [Postman Collection](collections/microsoft-office.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/microsoft-office.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### Excel API
+
 API for working with Excel workbooks, worksheets, ranges, charts, and tables.
 
-**Human URL:** [https://learn.microsoft.com/en-us/javascript/api/excel](https://learn.microsoft.com/en-us/javascript/api/excel)
-
-**Base URL:** https://graph.microsoft.com/v1.0
+- **Human URL:** [https://learn.microsoft.com/en-us/javascript/api/excel](https://learn.microsoft.com/en-us/javascript/api/excel)
+- **Base URL:** `https://graph.microsoft.com/v1.0`
 
 #### Tags
 
@@ -75,13 +83,15 @@ API for working with Excel workbooks, worksheets, ranges, charts, and tables.
 
 - [Documentation](https://learn.microsoft.com/en-us/office/dev/add-ins/reference/overview/excel-add-ins-reference-overview)
 - [Reference](https://learn.microsoft.com/en-us/javascript/api/excel)
+- [Postman Collection](collections/microsoft-office.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/microsoft-office.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### PowerPoint API
+
 API for creating and manipulating PowerPoint presentations, slides, and content.
 
-**Human URL:** [https://learn.microsoft.com/en-us/javascript/api/powerpoint](https://learn.microsoft.com/en-us/javascript/api/powerpoint)
-
-**Base URL:** https://graph.microsoft.com/v1.0
+- **Human URL:** [https://learn.microsoft.com/en-us/javascript/api/powerpoint](https://learn.microsoft.com/en-us/javascript/api/powerpoint)
+- **Base URL:** `https://graph.microsoft.com/v1.0`
 
 #### Tags
 
@@ -93,13 +103,15 @@ API for creating and manipulating PowerPoint presentations, slides, and content.
 
 - [Documentation](https://learn.microsoft.com/en-us/office/dev/add-ins/reference/overview/powerpoint-add-ins-reference-overview)
 - [Reference](https://learn.microsoft.com/en-us/javascript/api/powerpoint)
+- [Postman Collection](collections/microsoft-office.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/microsoft-office.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### Outlook Mail API
+
 API for accessing and managing email, calendar, contacts, and tasks in Outlook.
 
-**Human URL:** [https://learn.microsoft.com/en-us/graph/api/resources/mail-api-overview](https://learn.microsoft.com/en-us/graph/api/resources/mail-api-overview)
-
-**Base URL:** https://graph.microsoft.com/v1.0
+- **Human URL:** [https://learn.microsoft.com/en-us/graph/api/resources/mail-api-overview](https://learn.microsoft.com/en-us/graph/api/resources/mail-api-overview)
+- **Base URL:** `https://graph.microsoft.com/v1.0`
 
 #### Tags
 
@@ -112,13 +124,15 @@ API for accessing and managing email, calendar, contacts, and tasks in Outlook.
 
 - [Documentation](https://learn.microsoft.com/en-us/graph/api/resources/mail-api-overview)
 - [Getting Started](https://learn.microsoft.com/en-us/graph/tutorials)
+- [Postman Collection](collections/microsoft-office.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/microsoft-office.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### OneDrive API
+
 API for accessing files and folders stored in OneDrive and SharePoint.
 
-**Human URL:** [https://learn.microsoft.com/en-us/graph/api/resources/onedrive](https://learn.microsoft.com/en-us/graph/api/resources/onedrive)
-
-**Base URL:** https://graph.microsoft.com/v1.0
+- **Human URL:** [https://learn.microsoft.com/en-us/graph/api/resources/onedrive](https://learn.microsoft.com/en-us/graph/api/resources/onedrive)
+- **Base URL:** `https://graph.microsoft.com/v1.0`
 
 #### Tags
 
@@ -131,13 +145,15 @@ API for accessing files and folders stored in OneDrive and SharePoint.
 
 - [Documentation](https://learn.microsoft.com/en-us/graph/api/resources/onedrive)
 - [Getting Started](https://learn.microsoft.com/en-us/onedrive/developer/)
+- [Postman Collection](collections/microsoft-office.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/microsoft-office.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### Teams API
+
 API for integrating with Microsoft Teams, including messaging, channels, and collaboration features.
 
-**Human URL:** [https://learn.microsoft.com/en-us/graph/api/resources/teams-api-overview](https://learn.microsoft.com/en-us/graph/api/resources/teams-api-overview)
-
-**Base URL:** https://graph.microsoft.com/v1.0
+- **Human URL:** [https://learn.microsoft.com/en-us/graph/api/resources/teams-api-overview](https://learn.microsoft.com/en-us/graph/api/resources/teams-api-overview)
+- **Base URL:** `https://graph.microsoft.com/v1.0`
 
 #### Tags
 
@@ -149,9 +165,12 @@ API for integrating with Microsoft Teams, including messaging, channels, and col
 #### Properties
 
 - [Documentation](https://learn.microsoft.com/en-us/graph/api/resources/teams-api-overview)
+- [Postman Collection](collections/microsoft-office.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/microsoft-office.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ## Common Properties
 
+- [LinkedIn](https://www.linkedin.com/showcase/microsoft-365)
 - [Portal](https://developer.microsoft.com/en-us/microsoft-365)
 - [Website](https://www.microsoft.com/en-us/microsoft-365)
 - [Documentation](https://learn.microsoft.com/en-us/office/dev/add-ins/)
@@ -160,11 +179,11 @@ API for integrating with Microsoft Teams, including messaging, channels, and col
 - [Support](https://learn.microsoft.com/en-us/answers/products/)
 - [Terms of Service](https://www.microsoft.com/en-us/legal/terms-of-use)
 - [Privacy Policy](https://privacy.microsoft.com/en-us/privacystatement)
-- [Status](https://status.dev.microsoft.com/)
+- [Status Page](https://status.dev.microsoft.com/)
 - [GitHub Organization](https://github.com/OfficeDev)
+- [Integrations](https://www.microsoft.com/en-us/marketplace)
 
 ## Maintainers
 
 **FN:** Kin Lane
-
 **Email:** kin@apievangelist.com
