@@ -1,0 +1,48 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/microsoft-office-openapi.yml
+description: >-
+  Entity-relationship graph derived from the schemas and path structure of the
+  Office 365 / Microsoft Graph subset in this repo (Outlook mail, OneDrive files,
+  Teams). Relationships are inferred from $ref links and path nesting; id-prefix
+  detail is not published by Graph (opaque ids).
+entities:
+  - name: User
+    key: id
+    note: The signed-in user (/me); root of most navigation.
+  - name: Message
+    key: id
+    schema: "#/components/schemas/Message"
+    fields: [id, subject, bodyPreview, from, toRecipients, receivedDateTime]
+  - name: MailFolder
+    key: id
+    note: Container of messages (/me/mailFolders)
+  - name: Drive
+    key: id
+    schema: "#/components/schemas/Drive"
+    fields: [id, driveType, owner, quota]
+  - name: DriveItem
+    key: id
+    schema: "#/components/schemas/DriveItem"
+    fields: [id, name, size, file, folder, createdDateTime, lastModifiedDateTime]
+  - name: Team
+    key: id
+    note: A Microsoft Teams team (/teams/{team_id})
+  - name: Channel
+    key: id
+    note: A channel within a team
+  - name: ChatMessage
+    key: id
+    note: A message within a channel
+relationships:
+  - {from: User, type: has_many, to: Message, via: /me/messages}
+  - {from: User, type: has_many, to: MailFolder, via: /me/mailFolders}
+  - {from: User, type: has_one, to: Drive, via: /me/drive}
+  - {from: User, type: has_many, to: Team, via: /me/joinedTeams}
+  - {from: MailFolder, type: has_many, to: Message, via: messages}
+  - {from: Drive, type: has_many, to: DriveItem, via: root/children}
+  - {from: DriveItem, type: has_many, to: DriveItem, via: children (folder nesting)}
+  - {from: Team, type: has_many, to: Channel, via: channels}
+  - {from: Channel, type: has_many, to: ChatMessage, via: messages}
+notes:
+  - Microsoft Graph ids are opaque, service-assigned strings; no documented id-prefix scheme.

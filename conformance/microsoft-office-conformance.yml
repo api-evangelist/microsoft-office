@@ -1,0 +1,37 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/microsoft-office-openapi.yml + https://learn.microsoft.com/en-us/graph
+description: >-
+  Industry / cross-cutting standards this Office 365 / Microsoft Graph surface
+  conforms to. Derived from the OpenAPI (oauth2 scheme, OData query params) and
+  corroborated by Graph docs.
+standards:
+  - id: oauth2
+    conforms: true
+    evidence: openapi securitySchemes type oauth2 (Microsoft Entra ID authorization code flow)
+  - id: oidc
+    conforms: true
+    evidence: Entra ID publishes an OpenID Provider config at login.microsoftonline.com/common/v2.0/.well-known/openid-configuration (200; see well-known/)
+  - id: odata-v4
+    conforms: true
+    evidence: Microsoft Graph is an OData v4 API - $select/$filter/$top/$expand params and @odata.nextLink/@odata.context response members
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Graph uses its own {error:{code,message,innerError}} envelope, not application/problem+json
+  - id: rfc8594-sunset
+    conforms: true
+    evidence: Graph deprecation policy documents Sunset/Deprecation headers (see lifecycle/)
+  - id: pagination
+    conforms: true
+    evidence: OData server-driven paging via @odata.nextLink
+  - id: idempotency
+    conforms: partial
+    evidence: Conditional requests via eTag/If-Match (optimistic concurrency); no Idempotency-Key header
+  - id: fhir
+    conforms: false
+  - id: scim
+    conforms: partial
+    evidence: Entra ID supports SCIM 2.0 for provisioning, though not exposed by this Office 365 subset
+  - id: json-api
+    conforms: false
+    evidence: OData conventions, not JSON:API

@@ -1,0 +1,49 @@
+generated: '2026-06-20'
+method: searched
+source: https://learn.microsoft.com/en-us/graph/cli/installation
+description: >-
+  Microsoft Graph CLI (mgc) is the official first-party command-line interface
+  over Microsoft Graph — the API surface behind this Office 365 collection. A
+  second, community/PnP CLI (m365) is widely used for Microsoft 365 automation.
+clis:
+  - name: Microsoft Graph CLI
+    binary: mgc
+    official: true
+    repo: https://github.com/microsoftgraph/msgraph-cli
+    docs: https://learn.microsoft.com/en-us/graph/cli/overview
+    ga: '2024'
+    built_on: .NET
+    install:
+      - method: winget
+        command: winget install microsoft.msgraphcli
+      - method: msi
+        command: Download Microsoft.Graph.CLI.msi from GitHub Releases and run it
+      - method: archive
+        command: >-
+          Download msgraph-cli-<os>-<arch> zip/tar.gz from GitHub Releases,
+          extract, and run mgc
+    beta_variant:
+      binary: mgc-beta
+      repo: https://github.com/microsoftgraph/msgraph-beta-cli
+    command_surface:
+      - group: login / logout
+        note: Interactive, device-code, and app-only (client credentials) auth
+      - group: users
+      - group: me
+        note: Signed-in user (me messages, me drive, me joined-teams)
+      - group: teams
+      - group: drives
+      - group: groups
+      - group: applications
+    key_flows:
+      - mgc login --scopes "Mail.Read Files.Read"
+      - mgc users list
+      - mgc me messages list
+  - name: CLI for Microsoft 365
+    binary: m365
+    official: false
+    maintainer: PnP community (Microsoft-adjacent open source)
+    registry: npm
+    package: "@pnp/cli-microsoft365"
+    install: npm install -g @pnp/cli-microsoft365
+    docs: https://pnp.github.io/cli-microsoft365/

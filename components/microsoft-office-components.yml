@@ -1,0 +1,55 @@
+generated: '2026-06-20'
+method: searched
+source: https://learn.microsoft.com/en-us/graph/toolkit/overview
+description: >-
+  Microsoft Graph Toolkit (MGT) is a collection of first-party, Graph-connected
+  web components and authentication providers for building Office 365 / Microsoft
+  365 experiences. NOTE: MGT is deprecated — retirement period began 2025-09-01
+  with full retirement planned for 2026-08-28; Microsoft directs new work to the
+  Graph SDKs. Captured here because it is still the published UI-component surface.
+status: deprecated
+retirement:
+  begins: '2025-09-01'
+  full_retirement: '2026-08-28'
+  notice: https://devblogs.microsoft.com/microsoft365dev/microsoft-graph-toolkit-retirement/
+loaders:
+  - registry: npm
+    name: "@microsoft/mgt-components"
+    url: https://www.npmjs.com/package/@microsoft/mgt-components
+    note: All Graph-connected web components.
+  - registry: npm
+    name: "@microsoft/mgt-react"
+    note: React wrappers for the web components.
+  - registry: npm
+    name: "@microsoft/mgt-element"
+    note: Core element / provider base.
+  - registry: npm
+    name: "@microsoft/mgt-spfx"
+    note: SharePoint Framework integration.
+families:
+  - family: People & identity
+    components:
+      - mgt-login
+      - mgt-person
+      - mgt-person-card
+      - mgt-people
+      - mgt-people-picker
+  - family: Productivity
+    components:
+      - mgt-agenda
+      - mgt-tasks
+      - mgt-todo
+      - mgt-file
+      - mgt-file-list
+      - mgt-get
+  - family: Teams / Teamwork
+    components:
+      - mgt-teams-channel-picker
+      - mgt-channel-picker
+  - family: Search
+    components:
+      - mgt-search-box
+      - mgt-search-results
+      - mgt-picker
+repo: https://github.com/microsoftgraph/microsoft-graph-toolkit
+playground: https://mgt.dev/

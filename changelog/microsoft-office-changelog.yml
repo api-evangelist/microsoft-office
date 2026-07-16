@@ -1,0 +1,30 @@
+generated: '2026-06-20'
+method: searched
+source: https://learn.microsoft.com/en-us/graph/changelog
+description: >-
+  Microsoft Graph publishes a continuously-updated, dated changelog covering
+  additions, changes, and deprecations across both the v1.0 and beta versions,
+  categorized by workload (e.g. Mail, Files, Teamwork/Teams, Identity). It is
+  available as a filterable web page and an RSS feed. This artifact is a pointer
+  to that live source plus recent-window context from this repo's blog harvest;
+  it does not attempt to mirror the full history.
+changelog:
+  scheme: continuous-dated (per workload, per version)
+  current_version: v1.0
+  url: https://learn.microsoft.com/en-us/graph/changelog
+  rss: https://developer.microsoft.com/en-us/graph/changelog/rss/
+  categories: [Added, Changed, Deprecated]
+  versions: [v1.0, beta]
+recent_context:
+  note: >-
+    Recent product/API movement captured in this repo's blogs/ (Microsoft 365
+    Developer Blog), not the formal Graph changelog entries.
+  highlights:
+    - {date: '2026-06-11', highlight: Migrating EWS notifications to Microsoft Graph}
+    - {date: '2026-05-07', highlight: GA of the mailbox import and export (Graph mail) capability}
+    - {date: '2026-03-26', highlight: "Breaking change: Graph API updates to sensitive email properties"}
+    - {date: '2026-03-18', highlight: Changes to attachment IDs for inline images in Outlook add-ins}
+    - {date: '2026-06-29', highlight: Remote event receivers retiring - move to SharePoint webhooks before 2027-07-01}
+see_also:
+  blog: https://developer.microsoft.com/en-us/microsoft-365/blogs/
+  repo_blogs: blogs/

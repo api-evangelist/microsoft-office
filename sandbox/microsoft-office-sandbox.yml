@@ -1,0 +1,30 @@
+generated: '2026-06-20'
+method: searched
+source: https://developer.microsoft.com/en-us/microsoft-365/dev-program
+description: >-
+  Microsoft 365 provides a free developer sandbox rather than per-request test
+  credentials. The Microsoft 365 Developer Program grants a configurable,
+  isolated Microsoft 365 E5 tenant preloaded with sample users and data, used to
+  exercise Graph / Office 365 APIs without touching a production tenant. There
+  are no published magic test card/identifier values for this API.
+sandbox:
+  type: isolated-tenant
+  name: Microsoft 365 Developer Program (E5 sandbox subscription)
+  signup: https://developer.microsoft.com/en-us/microsoft-365/dev-program
+  docs: https://learn.microsoft.com/en-us/office/developer-program/microsoft-365-developer-program
+  characteristics:
+    - Free Microsoft 365 E5 developer subscription, renewable while actively developing.
+    - Isolated tenant separate from any production Microsoft 365 organization.
+    - Option to install sample data packs (sample users, mailboxes, files, Teams content).
+    - Same graph.microsoft.com endpoints and Entra ID OAuth as production — no separate sandbox base URL.
+  auth:
+    identity_host: https://login.microsoftonline.com
+    note: >-
+      Register an app in the sandbox tenant's Entra ID; the tenant GUID replaces
+      "common" in the authorize/token URLs for tenant-scoped flows.
+  test_values_published: false
+graph_explorer:
+  url: https://developer.microsoft.com/en-us/graph/graph-explorer
+  note: >-
+    Graph Explorer runs live Graph requests against a shared Microsoft demo
+    tenant (or your own), the interactive equivalent of a try-it sandbox.

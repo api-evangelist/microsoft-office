@@ -1,0 +1,63 @@
+generated: '2026-06-20'
+method: searched
+source: https://learn.microsoft.com/en-us/graph/errors
+format: microsoft-graph-error
+description: >-
+  Microsoft Graph does NOT use RFC 9457 problem+json. Errors are returned as a
+  JSON object with a top-level "error" member carrying a machine-readable "code",
+  a human-readable "message", and an "innerError" with a request-id and date for
+  support. Codes below are Graph's documented top-level error codes; HTTP status
+  codes are the standard status mapping Graph documents.
+envelope:
+  field: error
+  shape:
+    error:
+      code: string
+      message: string
+      innerError:
+        code: string
+        request-id: string
+        client-request-id: string
+        date: string
+http_status_codes:
+  - {status: 400, meaning: Bad Request - cannot be processed}
+  - {status: 401, meaning: Unauthorized - missing/invalid authentication token}
+  - {status: 403, meaning: Forbidden - insufficient permissions/scope}
+  - {status: 404, meaning: Not Found - resource does not exist}
+  - {status: 405, meaning: Method Not Allowed}
+  - {status: 406, meaning: Not Acceptable}
+  - {status: 409, meaning: Conflict - current state conflicts with request}
+  - {status: 410, meaning: Gone - resource no longer available}
+  - {status: 411, meaning: Length Required}
+  - {status: 412, meaning: Precondition Failed (eTag mismatch)}
+  - {status: 413, meaning: Request Entity Too Large}
+  - {status: 415, meaning: Unsupported Media Type}
+  - {status: 416, meaning: Requested Range Not Satisfiable}
+  - {status: 422, meaning: Unprocessable Entity}
+  - {status: 423, meaning: Locked}
+  - {status: 429, meaning: Too Many Requests - throttling; honor Retry-After}
+  - {status: 500, meaning: Internal Server Error}
+  - {status: 501, meaning: Not Implemented}
+  - {status: 503, meaning: Service Unavailable - honor Retry-After}
+  - {status: 504, meaning: Gateway Timeout}
+  - {status: 507, meaning: Insufficient Storage}
+  - {status: 509, meaning: Bandwidth Limit Exceeded}
+codes:
+  - {code: accessDenied, http: 403, meaning: The caller does not have permission to perform the action.}
+  - {code: activityLimitReached, http: 429, meaning: The app or user has been throttled.}
+  - {code: generalException, http: 500, meaning: An unspecified error has occurred.}
+  - {code: invalidRange, http: 416, meaning: The specified byte range is invalid or unavailable.}
+  - {code: invalidRequest, http: 400, meaning: The request is malformed or incorrect.}
+  - {code: itemNotFound, http: 404, meaning: The resource could not be found.}
+  - {code: malwareDetected, http: 403, meaning: Malware was detected in the requested resource.}
+  - {code: nameAlreadyExists, http: 409, meaning: The specified item name already exists.}
+  - {code: notAllowed, http: 403, meaning: The action is not allowed by the system.}
+  - {code: notFound, http: 404, meaning: The requested resource does not exist.}
+  - {code: notSupported, http: 501, meaning: The request is not supported by the system.}
+  - {code: resourceModified, http: 409, meaning: The resource being updated has changed since the caller last read it (eTag mismatch).}
+  - {code: resyncRequired, http: 409, meaning: The delta token is no longer valid; the app must resync.}
+  - {code: serviceNotAvailable, http: 503, meaning: The service is not available; retry after the Retry-After delay.}
+  - {code: quotaLimitReached, http: 507, meaning: The user has reached their quota limit.}
+  - {code: unauthenticated, http: 401, meaning: The caller is not authenticated.}
+notes:
+  - The bare OpenAPI subset in openapi/microsoft-office-openapi.yml declares only 200 responses, so this catalog is sourced from Graph's published error reference, not derived.

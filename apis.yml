@@ -14,7 +14,7 @@ tags:
   - Productivity
 url: https://raw.githubusercontent.com/api-evangelist/microsoft-office/refs/heads/main/apis.yml
 created: '2024-01-01'
-modified: '2026-04-28'
+modified: '2026-06-20'
 specificationVersion: '0.19'
 apis:
   - aid: microsoft-office:microsoft-graph-api
@@ -142,6 +142,36 @@ apis:
 common:
   - type: AgenticAccess
     url: agentic-access/microsoft-office-agentic-access.yml
+  - type: Packages
+    url: packages/microsoft-office-packages.yml
+  - type: WellKnown
+    url: well-known/microsoft-office-well-known.yml
+  - type: MCPServer
+    url: mcp/microsoft-office-mcp.yml
+  - type: LLMsTxt
+    url: llms/microsoft-office-llms.txt
+  - type: Overlay
+    url: overlays/microsoft-office-openapi-overlay.yaml
+  - type: Conformance
+    url: conformance/microsoft-office-conformance.yml
+  - type: ErrorCatalog
+    url: errors/microsoft-office-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/microsoft-office-lifecycle.yml
+  - type: Conventions
+    url: conventions/microsoft-office-conventions.yml
+  - type: ChangeLog
+    url: changelog/microsoft-office-changelog.yml
+  - type: CLI
+    url: cli/microsoft-office-cli.yml
+  - type: Components
+    url: components/microsoft-office-components.yml
+  - type: DataModel
+    url: data-model/microsoft-office-data-model.yml
+  - type: Sandbox
+    url: sandbox/microsoft-office-sandbox.yml
+  - type: TrustCenter
+    url: security/microsoft-office-trust-center.yml
   - type: VulnerabilityDisclosure
     url: security/microsoft-office-vulnerability-disclosure.yml
   - type: DomainSecurity

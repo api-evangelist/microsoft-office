@@ -1,0 +1,43 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Microsoft Office (Microsoft Graph subset)
+  version: 1.0.0
+extends: openapi/microsoft-office-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: microsoft-office
+      x-apievangelist-standard: OData v4
+      x-apievangelist-identity: Microsoft Entra ID (Azure AD) OAuth 2.0
+      x-apievangelist-docs: https://learn.microsoft.com/en-us/graph/overview
+      x-apievangelist-changelog: https://learn.microsoft.com/en-us/graph/changelog
+      x-apievangelist-error-format: microsoft-graph-error
+  - target: $.info
+    update:
+      x-apievangelist-artifacts:
+        packages: packages/microsoft-office-packages.yml
+        cli: cli/microsoft-office-cli.yml
+        components: components/microsoft-office-components.yml
+        mcp: mcp/microsoft-office-mcp.yml
+        conventions: conventions/microsoft-office-conventions.yml
+        errors: errors/microsoft-office-problem-types.yml
+        lifecycle: lifecycle/microsoft-office-lifecycle.yml
+        authentication: authentication/microsoft-office-authentication.yml
+        scopes: scopes/microsoft-office-scopes.yml
+        data_model: data-model/microsoft-office-data-model.yml
+        sandbox: sandbox/microsoft-office-sandbox.yml
+  - target: $.tags[?(@.name=='Mail')]
+    update:
+      description: Outlook mail operations on the signed-in user's mailbox.
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/graph/api/resources/mail-api-overview
+  - target: $.tags[?(@.name=='Drive')]
+    update:
+      description: OneDrive / SharePoint file operations.
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/graph/api/resources/onedrive
+  - target: $.tags[?(@.name=='Teams')]
+    update:
+      description: Microsoft Teams teamwork operations (teams, channels, messages).
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/graph/api/resources/teams-api-overview

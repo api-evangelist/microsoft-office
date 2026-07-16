@@ -1,0 +1,63 @@
+generated: '2026-06-20'
+method: searched
+source: https://learn.microsoft.com/en-us/graph/query-parameters
+description: >-
+  Cross-cutting request/response semantics for Microsoft Graph, the OData v4 API
+  behind this Office 365 collection. Sourced from Graph docs and cross-linked to
+  the repo's authentication/, scopes/, errors/, lifecycle/, and rate-limits/
+  artifacts.
+standard: OData v4
+authentication:
+  style: oauth2-bearer
+  identity: Microsoft Entra ID (Azure AD)
+  see: authentication/microsoft-office-authentication.yml
+pagination:
+  style: server-driven (OData)
+  next_link_field: "@odata.nextLink"
+  count_field: "@odata.count"
+  params:
+    - {name: $top, note: Page size / max items to return}
+    - {name: $skip, note: Number of items to skip (not supported on all resources)}
+    - {name: $skiptoken, note: Opaque continuation token embedded in @odata.nextLink}
+  note: Clients should follow @odata.nextLink until it is absent rather than construct paging URLs.
+query_shaping:
+  select: {param: $select, note: Sparse fieldsets - return only named properties}
+  filter: {param: $filter, note: OData filter expressions}
+  orderby: {param: $orderby}
+  expand: {param: $expand, note: Include related entities inline (relationship expansion)}
+  search: {param: $search, note: Full-text search on supported resources}
+  count: {param: $count, note: Include a total count}
+  format: {param: $format}
+advanced_query:
+  header: ConsistencyLevel
+  value: eventual
+  note: Required with $count and certain $filter/$search combinations on directory resources.
+request_tracing:
+  request_headers:
+    - client-request-id (caller-supplied GUID echoed back for correlation)
+  response_headers:
+    - request-id (server-side request identifier)
+    - client-request-id (echoed)
+  note: request-id and date also appear inside error innerError for support cases.
+conditional_requests:
+  etag: true
+  headers: [If-Match, If-None-Match]
+  note: eTags on entities enable optimistic concurrency; mismatch yields 412 / resourceModified.
+change_tracking:
+  mechanism: delta query
+  note: "GET .../delta returns @odata.deltaLink / @odata.nextLink for incremental sync."
+batching:
+  endpoint: https://graph.microsoft.com/v1.0/$batch
+  note: JSON batch - up to 20 subrequests per batch.
+versioning:
+  see: lifecycle/microsoft-office-lifecycle.yml
+  scheme: uri-path (v1.0 | beta)
+error_envelope:
+  see: errors/microsoft-office-problem-types.yml
+  field: error
+  format: microsoft-graph-error (not RFC 9457)
+rate_limit_signaling:
+  see: rate-limits/microsoft-office-rate-limits.yml
+  throttled_status: 429
+  retry_header: Retry-After
+  note: Throttling is per-app and per-tenant per service; honor Retry-After.

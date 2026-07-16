@@ -1,0 +1,79 @@
+generated: '2026-06-20'
+method: searched
+status: published
+source: https://learn.microsoft.com/en-us/graph/mcp-server/overview
+description: >-
+  Microsoft ships an official Model Context Protocol server for Microsoft Graph
+  (the API surface behind this Office 365 collection). "Microsoft MCP Server for
+  Enterprise" is a read-only, RAG-assisted server over Microsoft Graph, in public
+  preview. Its documented tools are captured below; the candidate_tools[] block
+  maps the OpenAPI operations in this repo to potential MCP tools for a fuller
+  Office-oriented server.
+server:
+  name: Microsoft MCP Server for Enterprise
+  transport: http
+  docs: https://learn.microsoft.com/en-us/graph/mcp-server/overview
+  catalog: https://github.com/microsoft/mcp
+  status: public-preview
+  scope_note: >-
+    Read-only Microsoft Entra identity/directory scenarios (users, groups,
+    applications, devices, admin reporting), honoring user roles and granted scopes.
+tools:
+  - name: microsoft_graph_suggest_queries
+    description: >-
+      Uses retrieval-augmented generation to search a curated catalog of Microsoft
+      Graph API examples that align with the user's intent.
+  - name: microsoft_graph_get
+    description: >-
+      Runs read-only Microsoft Graph API calls while honoring user roles, granted
+      scopes, and Graph throttling limits.
+  - name: microsoft_graph_list_properties
+    description: >-
+      Retrieves the schema for Microsoft Graph entities so the model understands
+      available properties and relationships before constructing requests.
+candidate_tools:
+  - name: list_my_messages
+    description: List the signed-in user's Outlook messages
+    source_operation: openapi/microsoft-office-openapi.yml#listMyMessages
+  - name: get_my_message
+    description: Get an Outlook message by id
+    source_operation: openapi/microsoft-office-openapi.yml#getMyMessage
+  - name: send_my_mail
+    description: Send mail as the signed-in user
+    source_operation: openapi/microsoft-office-openapi.yml#sendMyMail
+  - name: list_my_mail_folders
+    description: List the signed-in user's mail folders
+    source_operation: openapi/microsoft-office-openapi.yml#listMyMailFolders
+  - name: get_my_drive
+    description: Get the signed-in user's OneDrive
+    source_operation: openapi/microsoft-office-openapi.yml#getMyDrive
+  - name: list_my_drive_root_children
+    description: List items in the OneDrive root
+    source_operation: openapi/microsoft-office-openapi.yml#listMyDriveRootChildren
+  - name: get_my_drive_item
+    description: Get a OneDrive item by id
+    source_operation: openapi/microsoft-office-openapi.yml#getMyDriveItem
+  - name: download_my_drive_item_content
+    description: Download the content of a OneDrive item
+    source_operation: openapi/microsoft-office-openapi.yml#downloadMyDriveItemContent
+  - name: upload_my_drive_item_content
+    description: Upload content to a OneDrive item
+    source_operation: openapi/microsoft-office-openapi.yml#uploadMyDriveItemContent
+  - name: list_my_joined_teams
+    description: List teams the user has joined
+    source_operation: openapi/microsoft-office-openapi.yml#listMyJoinedTeams
+  - name: get_team
+    description: Get a team by id
+    source_operation: openapi/microsoft-office-openapi.yml#getTeam
+  - name: list_team_channels
+    description: List channels in a team
+    source_operation: openapi/microsoft-office-openapi.yml#listTeamChannels
+  - name: create_team_channel
+    description: Create a channel in a team
+    source_operation: openapi/microsoft-office-openapi.yml#createTeamChannel
+  - name: list_channel_messages
+    description: List messages in a channel
+    source_operation: openapi/microsoft-office-openapi.yml#listChannelMessages
+  - name: send_channel_message
+    description: Send a message to a channel
+    source_operation: openapi/microsoft-office-openapi.yml#sendChannelMessage

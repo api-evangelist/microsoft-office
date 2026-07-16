@@ -1,0 +1,31 @@
+generated: '2026-06-20'
+method: searched
+source: live probes of Microsoft 365 / Entra ID / Graph hosts
+description: >-
+  Well-known discovery surface for the hosts backing this collection. The Graph
+  API host (graph.microsoft.com) returns 401 on unauthenticated /.well-known/
+  paths; OAuth/OIDC discovery lives on the Microsoft Entra ID identity host
+  (login.microsoftonline.com), whose common-tenant openid-configuration is
+  saved verbatim below.
+hosts:
+  - host: https://login.microsoftonline.com
+    documents:
+      - path: /common/v2.0/.well-known/openid-configuration   # OIDC discovery (RFC 8414 / OIDC Discovery 1.0)
+        status: 200
+        file: microsoft-office-openid-configuration.json
+  - host: https://graph.microsoft.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 401
+      - path: /.well-known/oauth-authorization-server
+        status: 401
+      - path: /.well-known/api-catalog
+        status: 401
+      - path: /.well-known/ai-plugin.json
+        status: 401
+  - host: https://developer.microsoft.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 302
+      - path: /.well-known/api-catalog
+        status: 302

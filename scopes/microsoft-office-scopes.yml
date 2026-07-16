@@ -1,6 +1,12 @@
-generated: '2026-07-11'
-method: derived
+generated: '2026-06-20'
+method: searched
 source: openapi/microsoft-office-openapi.yml
+docs: https://learn.microsoft.com/en-us/graph/permissions-reference
+note: >-
+  The 7 scopes below the OpenAPI subset are supplemented by additional commonly
+  used delegated Microsoft Graph permissions relevant to the Office 365 surface,
+  taken from the Graph permissions reference. Microsoft Graph documents hundreds
+  of delegated and application permissions; see docs for the full registry.
 schemes:
 - name: oauth2
   source: openapi/microsoft-office-openapi.yml
@@ -53,3 +59,57 @@ scopes:
   - authorizationCode
   sources:
   - openapi/microsoft-office-openapi.yml
+- scope: Mail.ReadWrite
+  description: Read and write access to user mail
+  flows:
+  - authorizationCode
+  sources:
+  - https://learn.microsoft.com/en-us/graph/permissions-reference
+- scope: Calendars.ReadWrite
+  description: Read and write user calendars
+  flows:
+  - authorizationCode
+  sources:
+  - https://learn.microsoft.com/en-us/graph/permissions-reference
+- scope: Contacts.Read
+  description: Read user contacts
+  flows:
+  - authorizationCode
+  sources:
+  - https://learn.microsoft.com/en-us/graph/permissions-reference
+- scope: Files.ReadWrite.All
+  description: Read and write all files the user can access
+  flows:
+  - authorizationCode
+  sources:
+  - https://learn.microsoft.com/en-us/graph/permissions-reference
+- scope: Sites.Read.All
+  description: Read items in all SharePoint site collections
+  flows:
+  - authorizationCode
+  sources:
+  - https://learn.microsoft.com/en-us/graph/permissions-reference
+- scope: Chat.Read
+  description: Read the user's Teams chat messages
+  flows:
+  - authorizationCode
+  sources:
+  - https://learn.microsoft.com/en-us/graph/permissions-reference
+- scope: ChannelMessage.Read.All
+  description: Read user's Teams channel messages
+  flows:
+  - authorizationCode
+  sources:
+  - https://learn.microsoft.com/en-us/graph/permissions-reference
+- scope: offline_access
+  description: Maintain access to data via refresh tokens
+  flows:
+  - authorizationCode
+  sources:
+  - https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration
+- scope: openid
+  description: Sign the user in with OpenID Connect
+  flows:
+  - authorizationCode
+  sources:
+  - https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration

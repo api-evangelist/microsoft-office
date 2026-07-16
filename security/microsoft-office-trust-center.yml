@@ -1,0 +1,32 @@
+generated: '2026-06-20'
+method: searched
+source: https://www.microsoft.com/en-us/trust-center
+description: >-
+  Microsoft operates a public Trust Center and the Service Trust Portal, which
+  publish the compliance certifications and audit reports covering Microsoft 365
+  / Office 365 services. Certifications below are named on those surfaces. The
+  automated probe did not classify a provider-specific trust subdomain, so this
+  is captured from the Microsoft Trust Center directly (method: searched).
+url: https://www.microsoft.com/en-us/trust-center
+service_trust_portal: https://servicetrust.microsoft.com/
+compliance_offerings: https://learn.microsoft.com/en-us/compliance/regulatory/offering-home
+certifications:
+  - SOC 1
+  - SOC 2
+  - SOC 3
+  - ISO/IEC 27001
+  - ISO/IEC 27017
+  - ISO/IEC 27018
+  - ISO/IEC 27701
+  - ISO/IEC 22301
+  - FedRAMP High
+  - HIPAA / HITECH
+  - PCI DSS
+  - GDPR
+  - CSA STAR
+  - FIPS 140-2
+evidence:
+  - source: https://www.microsoft.com/en-us/trust-center
+    keywords: [trust center, compliance, certifications, soc 2, iso 27001]
+  - source: https://servicetrust.microsoft.com/
+    keywords: [service trust portal, audit reports, soc, iso, fedramp]

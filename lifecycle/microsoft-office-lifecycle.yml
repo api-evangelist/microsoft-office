@@ -1,0 +1,33 @@
+generated: '2026-06-20'
+method: searched
+source: https://learn.microsoft.com/en-us/graph/versioning-and-support
+description: >-
+  Microsoft Graph versioning, deprecation, and support policy for the Office 365
+  API surface in this collection.
+versioning:
+  scheme: uri-path
+  current: v1.0
+  channels:
+    - {name: v1.0, status: stable, note: Production/GA endpoints. baseURL https://graph.microsoft.com/v1.0}
+    - {name: beta, status: preview, note: Preview endpoints; not for production. baseURL https://graph.microsoft.com/beta}
+  docs: https://learn.microsoft.com/en-us/graph/versioning-and-support
+deprecation:
+  policy_url: https://learn.microsoft.com/en-us/graph/versioning-and-support#deprecation
+  min_support: >-
+    APIs and features generally available (v1.0) are supported for a minimum of
+    24 months after a deprecation announcement, or a longer period as
+    communicated, before removal.
+  sunset_header: true
+  deprecation_header: true
+  change_log: https://learn.microsoft.com/en-us/graph/changelog
+sla:
+  note: >-
+    Microsoft 365 / Graph availability is governed by the Microsoft Online
+    Services Service Level Agreement (commercial services target 99.9%).
+  url: https://www.microsoft.com/licensing/docs/view/Service-Level-Agreements-SLA-for-Online-Services
+status_page: https://status.dev.microsoft.com/
+service_health:
+  note: Tenant-level service health is surfaced in the Microsoft 365 admin center and via the Graph serviceHealth API.
+deprecated_operations: []
+notes:
+  - No operations in openapi/microsoft-office-openapi.yml are marked deprecated.

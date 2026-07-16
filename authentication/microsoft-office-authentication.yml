@@ -1,6 +1,7 @@
-generated: '2026-07-11'
-method: derived
+generated: '2026-06-20'
+method: searched
 source: openapi/microsoft-office-openapi.yml
+docs: https://learn.microsoft.com/en-us/graph/auth/
 summary:
   types:
   - oauth2
