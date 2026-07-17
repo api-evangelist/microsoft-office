@@ -1,0 +1,129 @@
+arazzo: 1.0.1
+info:
+  title: Microsoft Office Escalate an Inbox Message to a Teams Channel
+  summary: Match an inbox message against a filter, read it in full, and raise it as a Teams channel alert.
+  description: >-
+    A cross-service flow of the kind the unified Microsoft Graph surface exists
+    to enable: Outlook and Teams reached with one token in one sequence. The
+    workflow selects inbox messages with an OData filter, ends quietly when
+    nothing matches, reads the top match in full, and posts the sender, subject,
+    and preview into a Teams channel so a shared-mailbox alert reaches the
+    people who act on it. Every step spells out its request inline so the flow
+    can be read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: microsoftGraphApi
+  url: ../openapi/microsoft-office-openapi.yml
+  type: openapi
+workflows:
+- workflowId: mail-to-teams-alert
+  summary: Turn a filtered inbox message into a Teams channel alert.
+  description: >-
+    Lists messages matching an escalation filter, branches to a quiet end when
+    the inbox is clear, retrieves the full message, and posts an alert into the
+    target Teams channel.
+  inputs:
+    type: object
+    required:
+    - messageFilter
+    - teamId
+    - channelId
+    properties:
+      messageFilter:
+        type: string
+        description: >-
+          OData $filter expression selecting messages worth escalating, e.g.
+          "isRead eq false and importance eq 'high'".
+      teamId:
+        type: string
+        description: The id of the team holding the alert channel.
+      channelId:
+        type: string
+        description: The id of the channel the alert is posted to.
+  steps:
+  - stepId: findEscalations
+    description: >-
+      List messages matching the escalation filter, newest first, so the most
+      recent item needing attention is evaluated ahead of older mail.
+    operationId: listMyMessages
+    parameters:
+    - name: "$filter"
+      in: query
+      value: $inputs.messageFilter
+    - name: "$orderby"
+      in: query
+      value: receivedDateTime desc
+    - name: "$select"
+      in: query
+      value: id,subject,bodyPreview,from,receivedDateTime
+    - name: "$top"
+      in: query
+      value: 5
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      candidates: $response.body#/value
+      topMessageId: $response.body#/value/0/id
+    onSuccess:
+    - name: haveEscalation
+      type: goto
+      stepId: readMessage
+      criteria:
+      - context: $response.body
+        condition: $.value.length > 0
+        type: jsonpath
+    - name: nothingToEscalate
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.value.length == 0
+        type: jsonpath
+  - stepId: readMessage
+    description: >-
+      Retrieve the matched message in full so the alert carries the real sender
+      address and body preview rather than an id alone.
+    operationId: getMyMessage
+    parameters:
+    - name: id
+      in: path
+      value: $steps.findEscalations.outputs.topMessageId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      messageId: $response.body#/id
+      subject: $response.body#/subject
+      bodyPreview: $response.body#/bodyPreview
+      senderAddress: $response.body#/from/emailAddress/address
+      senderName: $response.body#/from/emailAddress/name
+      receivedDateTime: $response.body#/receivedDateTime
+  - stepId: postAlert
+    description: >-
+      Post the alert into the Teams channel so the message is visible to the
+      whole responding team rather than sitting in one person's inbox.
+    operationId: sendChannelMessage
+    parameters:
+    - name: team_id
+      in: path
+      value: $inputs.teamId
+    - name: channel_id
+      in: path
+      value: $inputs.channelId
+    requestBody:
+      contentType: application/json
+      payload:
+        body:
+          contentType: html
+          content: >-
+            Inbox escalation from $steps.readMessage.outputs.senderName
+            ($steps.readMessage.outputs.senderAddress) received
+            $steps.readMessage.outputs.receivedDateTime - subject:
+            $steps.readMessage.outputs.subject -
+            $steps.readMessage.outputs.bodyPreview
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      alertMessageId: $response.body#/id
+  outputs:
+    escalatedMessageId: $steps.readMessage.outputs.messageId
+    escalatedSubject: $steps.readMessage.outputs.subject
+    alertMessageId: $steps.postAlert.outputs.alertMessageId

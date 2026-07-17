@@ -1,0 +1,126 @@
+arazzo: 1.0.1
+info:
+  title: Microsoft Office Announce a New OneDrive File in a Teams Channel
+  summary: Find a file in the drive root, confirm its metadata, and post it to a Teams channel.
+  description: >-
+    A cross-service flow of the kind the unified Microsoft Graph surface exists
+    to enable: OneDrive and Teams reached with one token in one sequence. The
+    workflow lists the drive root, reads the target driveItem to confirm it is
+    a file and capture its name and size, resolves the destination channel, and
+    posts an announcement carrying the file details. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: microsoftGraphApi
+  url: ../openapi/microsoft-office-openapi.yml
+  type: openapi
+workflows:
+- workflowId: drive-file-to-teams-notification
+  summary: Notify a Teams channel that a OneDrive file is ready.
+  description: >-
+    Browses the drive root, verifies the target item carries a file facet,
+    checks the destination channel exists in the team, and posts a message
+    naming the file. Folders are not announced.
+  inputs:
+    type: object
+    required:
+    - itemId
+    - teamId
+    - channelId
+    properties:
+      itemId:
+        type: string
+        description: >-
+          The id of the driveItem to announce. Resolve it from the root
+          listing when only a file name is known.
+      teamId:
+        type: string
+        description: The id of the team holding the destination channel.
+      channelId:
+        type: string
+        description: The id of the channel the announcement is posted to.
+  steps:
+  - stepId: browseRoot
+    description: >-
+      List the items in the drive root so a file can be resolved by name and
+      so the announcement reflects what is actually present in the drive.
+    operationId: listMyDriveRootChildren
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      rootItems: $response.body#/value
+      firstItemId: $response.body#/value/0/id
+  - stepId: inspectItem
+    description: >-
+      Read the target driveItem to confirm it exists and carries a file facet,
+      and to capture the name and size quoted in the announcement.
+    operationId: getMyDriveItem
+    parameters:
+    - name: item_id
+      in: path
+      value: $inputs.itemId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      itemId: $response.body#/id
+      itemName: $response.body#/name
+      itemSize: $response.body#/size
+      lastModifiedDateTime: $response.body#/lastModifiedDateTime
+    onSuccess:
+    - name: isFile
+      type: goto
+      stepId: resolveChannel
+      criteria:
+      - context: $response.body
+        condition: $.file
+        type: jsonpath
+    - name: isFolder
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.folder
+        type: jsonpath
+  - stepId: resolveChannel
+    description: >-
+      List the team's channels to confirm the destination channel resolves
+      before a message is posted against its id.
+    operationId: listTeamChannels
+    parameters:
+    - name: team_id
+      in: path
+      value: $inputs.teamId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      channels: $response.body#/value
+  - stepId: announceFile
+    description: >-
+      Post the announcement to the channel, naming the file and its size so
+      readers know what landed without opening OneDrive first.
+    operationId: sendChannelMessage
+    parameters:
+    - name: team_id
+      in: path
+      value: $inputs.teamId
+    - name: channel_id
+      in: path
+      value: $inputs.channelId
+    requestBody:
+      contentType: application/json
+      payload:
+        body:
+          contentType: html
+          content: >-
+            New file available in OneDrive:
+            $steps.inspectItem.outputs.itemName
+            ($steps.inspectItem.outputs.itemSize bytes), last modified
+            $steps.inspectItem.outputs.lastModifiedDateTime.
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      announcementId: $response.body#/id
+  outputs:
+    announcedItemId: $steps.inspectItem.outputs.itemId
+    announcedItemName: $steps.inspectItem.outputs.itemName
+    announcementId: $steps.announceFile.outputs.announcementId

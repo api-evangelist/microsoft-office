@@ -1,0 +1,107 @@
+arazzo: 1.0.1
+info:
+  title: Microsoft Office Discover and Download a OneDrive File
+  summary: Resolve the user's drive, browse the root, inspect an item, and download its content.
+  description: >-
+    The onboarding path for any OneDrive integration on Microsoft Graph. The
+    workflow resolves the signed-in user's drive and its quota, lists the items
+    in the drive root, inspects the target item to confirm it is a file rather
+    than a folder, and then downloads the item's binary content. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: microsoftGraphApi
+  url: ../openapi/microsoft-office-openapi.yml
+  type: openapi
+workflows:
+- workflowId: drive-file-discovery-download
+  summary: Locate a file in the OneDrive root by name and download its content.
+  description: >-
+    Resolves the drive, enumerates root children, verifies the chosen item is a
+    file, and retrieves its content stream. Graph answers the content request
+    with a 302 redirect to a pre-authenticated download URL, or with the bytes
+    directly, so both outcomes are treated as success.
+  inputs:
+    type: object
+    required:
+    - itemId
+    properties:
+      itemId:
+        type: string
+        description: >-
+          The driveItem id to download. Resolve it from the root listing
+          returned by the browseRoot step when it is not known ahead of time.
+  steps:
+  - stepId: resolveDrive
+    description: >-
+      Resolve the signed-in user's OneDrive to confirm access and capture the
+      drive id, type, and remaining quota before transferring any content.
+    operationId: getMyDrive
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      driveId: $response.body#/id
+      driveType: $response.body#/driveType
+      quota: $response.body#/quota
+  - stepId: browseRoot
+    description: >-
+      List the items in the root of the drive so the caller can resolve a
+      target file by name when only a human-readable name is known.
+    operationId: listMyDriveRootChildren
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      rootItems: $response.body#/value
+      firstItemId: $response.body#/value/0/id
+      firstItemName: $response.body#/value/0/name
+  - stepId: inspectItem
+    description: >-
+      Read the target driveItem's metadata to confirm it exists and carries a
+      file facet, which distinguishes a downloadable file from a folder.
+    operationId: getMyDriveItem
+    parameters:
+    - name: item_id
+      in: path
+      value: $inputs.itemId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      itemId: $response.body#/id
+      itemName: $response.body#/name
+      itemSize: $response.body#/size
+      file: $response.body#/file
+      lastModifiedDateTime: $response.body#/lastModifiedDateTime
+    onSuccess:
+    - name: isFile
+      type: goto
+      stepId: downloadContent
+      criteria:
+      - context: $response.body
+        condition: $.file
+        type: jsonpath
+    - name: isFolder
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.folder
+        type: jsonpath
+  - stepId: downloadContent
+    description: >-
+      Download the file's content. Graph either redirects to a short-lived
+      pre-authenticated download URL or streams the bytes directly, so both a
+      302 and a 200 are accepted as success.
+    operationId: downloadMyDriveItemContent
+    parameters:
+    - name: item_id
+      in: path
+      value: $steps.inspectItem.outputs.itemId
+    successCriteria:
+    - condition: $statusCode == 200 || $statusCode == 302
+    outputs:
+      downloadStatus: $statusCode
+  outputs:
+    driveId: $steps.resolveDrive.outputs.driveId
+    downloadedItemId: $steps.inspectItem.outputs.itemId
+    downloadedItemName: $steps.inspectItem.outputs.itemName
+    downloadedItemSize: $steps.inspectItem.outputs.itemSize

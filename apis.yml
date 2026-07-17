@@ -180,6 +180,30 @@ common:
     url: authentication/microsoft-office-authentication.yml
   - type: OAuthScopes
     url: scopes/microsoft-office-scopes.yml
+  - type: Arazzo
+    url: arazzo/microsoft-office-mail-triage-and-respond-workflow.yml
+    name: Microsoft Office Triage Inbox Messages and Respond
+  - type: Arazzo
+    url: arazzo/microsoft-office-mail-folder-message-export-workflow.yml
+    name: Microsoft Office Inventory Mail Folders and Export Messages
+  - type: Arazzo
+    url: arazzo/microsoft-office-mail-to-teams-alert-workflow.yml
+    name: Microsoft Office Escalate an Inbox Message to a Teams Channel
+  - type: Arazzo
+    url: arazzo/microsoft-office-drive-file-discovery-download-workflow.yml
+    name: Microsoft Office Discover and Download a OneDrive File
+  - type: Arazzo
+    url: arazzo/microsoft-office-drive-file-update-roundtrip-workflow.yml
+    name: Microsoft Office Update a OneDrive File and Verify the Write
+  - type: Arazzo
+    url: arazzo/microsoft-office-drive-file-to-teams-notification-workflow.yml
+    name: Microsoft Office Announce a New OneDrive File in a Teams Channel
+  - type: Arazzo
+    url: arazzo/microsoft-office-teams-channel-provisioning-workflow.yml
+    name: Microsoft Office Provision a Teams Channel and Announce It
+  - type: Arazzo
+    url: arazzo/microsoft-office-teams-channel-message-digest-workflow.yml
+    name: Microsoft Office Build a Teams Channel Message Digest
   - type: LinkedIn
     url: https://www.linkedin.com/showcase/microsoft-365
   - type: Portal

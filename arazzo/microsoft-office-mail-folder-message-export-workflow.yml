@@ -1,0 +1,108 @@
+arazzo: 1.0.1
+info:
+  title: Microsoft Office Inventory Mail Folders and Export Messages
+  summary: Enumerate mail folders, page a filtered message list, and read one message in full.
+  description: >-
+    The archiving and compliance-export pattern for Outlook on Microsoft Graph.
+    The workflow first enumerates the signed-in user's mail folders to establish
+    the mailbox layout and resolve folder ids, then lists messages narrowed by a
+    caller-supplied OData filter, and finally reads a single message in full so
+    the exporter has complete content rather than a preview. Every step spells
+    out its request inline so the flow can be read and executed without opening
+    the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: microsoftGraphApi
+  url: ../openapi/microsoft-office-openapi.yml
+  type: openapi
+workflows:
+- workflowId: mail-folder-message-export
+  summary: Map the mailbox folder structure, then list and read messages for export.
+  description: >-
+    Lists mail folders to resolve the mailbox layout, selects messages with an
+    OData filter (which may scope by parentFolderId using an id from the folder
+    inventory), and retrieves the first match in full.
+  inputs:
+    type: object
+    required:
+    - messageFilter
+    properties:
+      messageFilter:
+        type: string
+        description: >-
+          OData $filter expression selecting messages to export, e.g.
+          "receivedDateTime ge 2026-01-01T00:00:00Z" or a
+          "parentFolderId eq '<id>'" expression built from the folder inventory.
+      pageSize:
+        type: integer
+        description: Maximum number of messages to return in one page.
+        default: 50
+  steps:
+  - stepId: listFolders
+    description: >-
+      Enumerate the signed-in user's mail folders to establish the mailbox
+      layout and make folder ids available for scoping the export filter.
+    operationId: listMyMailFolders
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      folders: $response.body#/value
+      firstFolderId: $response.body#/value/0/id
+  - stepId: listMessages
+    description: >-
+      List messages matching the export filter, oldest first so repeated runs
+      page forward through the mailbox deterministically.
+    operationId: listMyMessages
+    parameters:
+    - name: "$filter"
+      in: query
+      value: $inputs.messageFilter
+    - name: "$orderby"
+      in: query
+      value: receivedDateTime asc
+    - name: "$select"
+      in: query
+      value: id,subject,bodyPreview,from,toRecipients,receivedDateTime
+    - name: "$top"
+      in: query
+      value: $inputs.pageSize
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      messages: $response.body#/value
+      firstMessageId: $response.body#/value/0/id
+    onSuccess:
+    - name: haveMessages
+      type: goto
+      stepId: readMessage
+      criteria:
+      - context: $response.body
+        condition: $.value.length > 0
+        type: jsonpath
+    - name: nothingToExport
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.value.length == 0
+        type: jsonpath
+  - stepId: readMessage
+    description: >-
+      Retrieve the first matched message in full so the export captures the
+      complete record rather than the truncated preview returned by the list.
+    operationId: getMyMessage
+    parameters:
+    - name: id
+      in: path
+      value: $steps.listMessages.outputs.firstMessageId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      messageId: $response.body#/id
+      subject: $response.body#/subject
+      bodyPreview: $response.body#/bodyPreview
+      senderAddress: $response.body#/from/emailAddress/address
+      receivedDateTime: $response.body#/receivedDateTime
+  outputs:
+    folders: $steps.listFolders.outputs.folders
+    exportedMessages: $steps.listMessages.outputs.messages
+    firstExportedMessageId: $steps.readMessage.outputs.messageId

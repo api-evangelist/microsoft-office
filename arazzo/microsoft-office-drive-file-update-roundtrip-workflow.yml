@@ -1,0 +1,109 @@
+arazzo: 1.0.1
+info:
+  title: Microsoft Office Update a OneDrive File and Verify the Write
+  summary: Read a file's metadata, back up its current bytes, upload new content, and read the item back.
+  description: >-
+    The read-modify-write round trip every OneDrive automation needs on
+    Microsoft Graph. The workflow inspects the target driveItem to capture its
+    size and last-modified stamp, downloads the current bytes so the caller
+    holds a rollback copy, uploads replacement content, and reads the item back
+    to prove the write landed and the modified timestamp advanced. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: microsoftGraphApi
+  url: ../openapi/microsoft-office-openapi.yml
+  type: openapi
+workflows:
+- workflowId: drive-file-update-roundtrip
+  summary: Safely replace the content of an existing OneDrive file and confirm the result.
+  description: >-
+    Captures the pre-update state of a driveItem, takes a content backup,
+    replaces the content with the supplied bytes, and re-reads the item to
+    verify the new size and lastModifiedDateTime.
+  inputs:
+    type: object
+    required:
+    - itemId
+    - fileContent
+    properties:
+      itemId:
+        type: string
+        description: The id of the existing driveItem whose content is replaced.
+      fileContent:
+        type: string
+        description: >-
+          The replacement file content uploaded as an octet-stream body. This
+          PUT replaces the item's content in full; it is not a partial patch.
+  steps:
+  - stepId: inspectBeforeUpdate
+    description: >-
+      Read the driveItem before writing so the caller records the pre-update
+      size and lastModifiedDateTime to compare against after the upload.
+    operationId: getMyDriveItem
+    parameters:
+    - name: item_id
+      in: path
+      value: $inputs.itemId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      itemId: $response.body#/id
+      itemName: $response.body#/name
+      sizeBefore: $response.body#/size
+      lastModifiedBefore: $response.body#/lastModifiedDateTime
+  - stepId: backupContent
+    description: >-
+      Download the current bytes before they are overwritten so the caller can
+      restore the previous version if the update is later rejected.
+    operationId: downloadMyDriveItemContent
+    parameters:
+    - name: item_id
+      in: path
+      value: $steps.inspectBeforeUpdate.outputs.itemId
+    successCriteria:
+    - condition: $statusCode == 200 || $statusCode == 302
+    outputs:
+      backupStatus: $statusCode
+  - stepId: uploadContent
+    description: >-
+      Replace the item's content with the supplied bytes. Graph returns the
+      updated driveItem describing the newly written file.
+    operationId: uploadMyDriveItemContent
+    parameters:
+    - name: item_id
+      in: path
+      value: $steps.inspectBeforeUpdate.outputs.itemId
+    requestBody:
+      contentType: application/octet-stream
+      payload: $inputs.fileContent
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      updatedItemId: $response.body#/id
+      updatedName: $response.body#/name
+      updatedSize: $response.body#/size
+      updatedLastModified: $response.body#/lastModifiedDateTime
+  - stepId: verifyAfterUpdate
+    description: >-
+      Read the item back as an independent confirmation that the write is
+      durable and that lastModifiedDateTime advanced past the pre-update stamp.
+    operationId: getMyDriveItem
+    parameters:
+    - name: item_id
+      in: path
+      value: $steps.uploadContent.outputs.updatedItemId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      verifiedItemId: $response.body#/id
+      verifiedSize: $response.body#/size
+      verifiedLastModified: $response.body#/lastModifiedDateTime
+  outputs:
+    itemId: $steps.verifyAfterUpdate.outputs.verifiedItemId
+    itemName: $steps.inspectBeforeUpdate.outputs.itemName
+    sizeBefore: $steps.inspectBeforeUpdate.outputs.sizeBefore
+    sizeAfter: $steps.verifyAfterUpdate.outputs.verifiedSize
+    lastModifiedBefore: $steps.inspectBeforeUpdate.outputs.lastModifiedBefore
+    lastModifiedAfter: $steps.verifyAfterUpdate.outputs.verifiedLastModified

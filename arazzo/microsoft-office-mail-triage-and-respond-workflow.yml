@@ -1,0 +1,131 @@
+arazzo: 1.0.1
+info:
+  title: Microsoft Office Triage Inbox Messages and Respond
+  summary: List filtered inbox messages, read the top match in full, and send a reply.
+  description: >-
+    The everyday Outlook integration pattern on Microsoft Graph. The workflow
+    lists the signed-in user's messages using a caller-supplied OData filter
+    (for example unread mail from a given sender), reads the highest-priority
+    match in full to obtain its body and sender address, and then sends a reply
+    as the signed-in user. Every step spells out its request inline so the flow
+    can be read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: microsoftGraphApi
+  url: ../openapi/microsoft-office-openapi.yml
+  type: openapi
+workflows:
+- workflowId: mail-triage-and-respond
+  summary: Find a message matching a filter, read it, and reply to the sender.
+  description: >-
+    Selects candidate messages with an OData filter, branches on whether
+    anything matched, retrieves the full message, and sends a reply to the
+    original sender's address.
+  inputs:
+    type: object
+    required:
+    - messageFilter
+    - replySubject
+    - replyBody
+    properties:
+      messageFilter:
+        type: string
+        description: >-
+          OData $filter expression selecting candidate messages, e.g.
+          "isRead eq false" or "from/emailAddress/address eq 'a@b.com'".
+      messageOrderBy:
+        type: string
+        description: OData $orderby expression controlling triage priority.
+        default: receivedDateTime desc
+      replySubject:
+        type: string
+        description: Subject line to use on the outgoing reply.
+      replyBody:
+        type: string
+        description: Body content of the outgoing reply.
+      replyBodyType:
+        type: string
+        description: Content type of the reply body.
+        enum:
+        - Text
+        - HTML
+        default: Text
+  steps:
+  - stepId: findMessages
+    description: >-
+      List the signed-in user's messages narrowed by the supplied OData filter,
+      ordered so the highest-priority message to triage lands first.
+    operationId: listMyMessages
+    parameters:
+    - name: "$filter"
+      in: query
+      value: $inputs.messageFilter
+    - name: "$orderby"
+      in: query
+      value: $inputs.messageOrderBy
+    - name: "$select"
+      in: query
+      value: id,subject,bodyPreview,from,receivedDateTime
+    - name: "$top"
+      in: query
+      value: 10
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      topMessageId: $response.body#/value/0/id
+      matchedMessages: $response.body#/value
+    onSuccess:
+    - name: haveMessage
+      type: goto
+      stepId: readMessage
+      criteria:
+      - context: $response.body
+        condition: $.value.length > 0
+        type: jsonpath
+    - name: inboxClear
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.value.length == 0
+        type: jsonpath
+  - stepId: readMessage
+    description: >-
+      Retrieve the full message by id to obtain the sender address and the
+      complete body needed to compose an informed reply.
+    operationId: getMyMessage
+    parameters:
+    - name: id
+      in: path
+      value: $steps.findMessages.outputs.topMessageId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      messageId: $response.body#/id
+      subject: $response.body#/subject
+      bodyPreview: $response.body#/bodyPreview
+      senderAddress: $response.body#/from/emailAddress/address
+      senderName: $response.body#/from/emailAddress/name
+      receivedDateTime: $response.body#/receivedDateTime
+  - stepId: sendReply
+    description: >-
+      Send a reply as the signed-in user, addressed to the original sender and
+      saved to the Sent Items folder for an auditable trail.
+    operationId: sendMyMail
+    requestBody:
+      contentType: application/json
+      payload:
+        message:
+          subject: $inputs.replySubject
+          body:
+            contentType: $inputs.replyBodyType
+            content: $inputs.replyBody
+          toRecipients:
+          - emailAddress:
+              address: $steps.readMessage.outputs.senderAddress
+        saveToSentItems: true
+    successCriteria:
+    - condition: $statusCode == 202
+  outputs:
+    triagedMessageId: $steps.readMessage.outputs.messageId
+    triagedSubject: $steps.readMessage.outputs.subject
+    repliedTo: $steps.readMessage.outputs.senderAddress

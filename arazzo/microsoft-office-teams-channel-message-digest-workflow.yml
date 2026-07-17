@@ -1,0 +1,97 @@
+arazzo: 1.0.1
+info:
+  title: Microsoft Office Build a Teams Channel Message Digest
+  summary: Walk the user's joined teams, enumerate a team's channels, and pull a channel's recent messages.
+  description: >-
+    The read-side traversal behind every Teams digest, archive, or analytics
+    job on Microsoft Graph. The workflow lists the teams the signed-in user has
+    joined, enumerates the channels of the target team, and pulls the messages
+    of the target channel so a summarizer has the raw conversation to work
+    from. Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: microsoftGraphApi
+  url: ../openapi/microsoft-office-openapi.yml
+  type: openapi
+workflows:
+- workflowId: teams-channel-message-digest
+  summary: Traverse teams to channels to messages for a single channel digest.
+  description: >-
+    Establishes the caller's team membership, resolves the channel list for the
+    target team, and reads the channel's messages, ending cleanly when the team
+    has no channels to digest.
+  inputs:
+    type: object
+    required:
+    - teamId
+    - channelId
+    properties:
+      teamId:
+        type: string
+        description: >-
+          The id of the team to digest. Resolve it from the joined-teams
+          listing when only a team display name is known.
+      channelId:
+        type: string
+        description: The id of the channel whose messages are collected.
+  steps:
+  - stepId: listJoinedTeams
+    description: >-
+      List the teams the signed-in user has joined, establishing the set of
+      teams the digest is permitted to read.
+    operationId: listMyJoinedTeams
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      joinedTeams: $response.body#/value
+      firstTeamId: $response.body#/value/0/id
+  - stepId: listChannels
+    description: >-
+      Enumerate the target team's channels to confirm the requested channel is
+      present and to capture channel names for the digest headings.
+    operationId: listTeamChannels
+    parameters:
+    - name: team_id
+      in: path
+      value: $inputs.teamId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      channels: $response.body#/value
+    onSuccess:
+    - name: haveChannels
+      type: goto
+      stepId: listMessages
+      criteria:
+      - context: $response.body
+        condition: $.value.length > 0
+        type: jsonpath
+    - name: noChannels
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.value.length == 0
+        type: jsonpath
+  - stepId: listMessages
+    description: >-
+      Read the chat messages posted to the target channel, giving the digest
+      the raw conversation to summarize or archive.
+    operationId: listChannelMessages
+    parameters:
+    - name: team_id
+      in: path
+      value: $inputs.teamId
+    - name: channel_id
+      in: path
+      value: $inputs.channelId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      messages: $response.body#/value
+      latestMessageId: $response.body#/value/0/id
+  outputs:
+    joinedTeams: $steps.listJoinedTeams.outputs.joinedTeams
+    channels: $steps.listChannels.outputs.channels
+    messages: $steps.listMessages.outputs.messages
+    latestMessageId: $steps.listMessages.outputs.latestMessageId

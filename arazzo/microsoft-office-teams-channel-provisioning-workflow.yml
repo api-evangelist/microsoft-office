@@ -1,0 +1,150 @@
+arazzo: 1.0.1
+info:
+  title: Microsoft Office Provision a Teams Channel and Announce It
+  summary: Resolve a joined team, check for an existing channel, create it when missing, and post a kickoff message.
+  description: >-
+    The project-onboarding pattern for Microsoft Teams on Microsoft Graph. The
+    workflow confirms the signed-in user's team membership, reads the team,
+    lists its channels and branches on whether the target channel already
+    exists, creates the channel only when it is missing, and posts a kickoff
+    message so the channel is never provisioned empty. Every step spells out
+    its request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: microsoftGraphApi
+  url: ../openapi/microsoft-office-openapi.yml
+  type: openapi
+workflows:
+- workflowId: teams-channel-provisioning
+  summary: Idempotently create a Teams channel and post its first message.
+  description: >-
+    Verifies team membership and existence, inspects the channel list to make
+    provisioning idempotent, creates the channel when absent, and announces it
+    with a kickoff post.
+  inputs:
+    type: object
+    required:
+    - teamId
+    - channelDisplayName
+    - kickoffMessage
+    properties:
+      teamId:
+        type: string
+        description: The id of the team to provision the channel in.
+      channelDisplayName:
+        type: string
+        description: Display name of the channel to create if it does not exist.
+      channelDescription:
+        type: string
+        description: Description applied to a newly created channel.
+        default: Provisioned by an Arazzo workflow.
+      membershipType:
+        type: string
+        description: Channel membership model.
+        enum:
+        - standard
+        - private
+        default: standard
+      kickoffMessage:
+        type: string
+        description: HTML content of the first message posted to the channel.
+  steps:
+  - stepId: confirmMembership
+    description: >-
+      List the teams the signed-in user belongs to, confirming the caller has
+      standing in the tenant before attempting any team-scoped write.
+    operationId: listMyJoinedTeams
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      joinedTeams: $response.body#/value
+  - stepId: readTeam
+    description: >-
+      Read the target team by id to confirm it resolves and to capture its
+      display name for the announcement copy.
+    operationId: getTeam
+    parameters:
+    - name: team_id
+      in: path
+      value: $inputs.teamId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      teamId: $response.body#/id
+      teamDisplayName: $response.body#/displayName
+  - stepId: listChannels
+    description: >-
+      List the team's existing channels so provisioning is idempotent: an
+      existing channel of the same name is reused rather than duplicated.
+    operationId: listTeamChannels
+    parameters:
+    - name: team_id
+      in: path
+      value: $inputs.teamId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      channels: $response.body#/value
+      firstChannelId: $response.body#/value/0/id
+    onSuccess:
+    - name: channelMissing
+      type: goto
+      stepId: createChannel
+      criteria:
+      - context: $response.body
+        condition: $.value[?(@.displayName == '$inputs.channelDisplayName')].length == 0
+        type: jsonpath
+    - name: channelExists
+      type: goto
+      stepId: postKickoff
+      criteria:
+      - context: $response.body
+        condition: $.value[?(@.displayName == '$inputs.channelDisplayName')].length > 0
+        type: jsonpath
+  - stepId: createChannel
+    description: >-
+      Create the channel in the team, applying the requested membership model.
+      Graph answers with the created channel and its id.
+    operationId: createTeamChannel
+    parameters:
+    - name: team_id
+      in: path
+      value: $inputs.teamId
+    requestBody:
+      contentType: application/json
+      payload:
+        displayName: $inputs.channelDisplayName
+        description: $inputs.channelDescription
+        membershipType: $inputs.membershipType
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      createdChannelId: $response.body#/id
+      createdChannelName: $response.body#/displayName
+  - stepId: postKickoff
+    description: >-
+      Post the kickoff message to the channel so members arriving from the
+      Teams notification find context rather than an empty conversation.
+    operationId: sendChannelMessage
+    parameters:
+    - name: team_id
+      in: path
+      value: $inputs.teamId
+    - name: channel_id
+      in: path
+      value: $steps.createChannel.outputs.createdChannelId
+    requestBody:
+      contentType: application/json
+      payload:
+        body:
+          contentType: html
+          content: $inputs.kickoffMessage
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      kickoffMessageId: $response.body#/id
+  outputs:
+    teamDisplayName: $steps.readTeam.outputs.teamDisplayName
+    channelId: $steps.createChannel.outputs.createdChannelId
+    kickoffMessageId: $steps.postKickoff.outputs.kickoffMessageId
