@@ -103,6 +103,11 @@ apis:
   baseURL: https://graph.microsoft.com/v1.0
   tags:
   - Cloud Storage
+  - File
+  - OneDrive
+  - Storage
+  tags_raw:
+  - Cloud Storage
   - Files
   - OneDrive
   - Storage
@@ -122,6 +127,11 @@ apis:
   - Chat
   - Collaboration
   - Meetings
+  - Team
+  tags_raw:
+  - Chat
+  - Collaboration
+  - Meetings
   - Teams
   properties:
   - type: Documentation
@@ -132,6 +142,8 @@ apis:
   humanURL: https://developer.microsoft.com/en-us/graph
   baseURL: https://graph.microsoft.com/v1.0
   tags:
+  - Drives
+  tags_raw:
   - Drive
   properties:
   - type: OpenAPI
@@ -168,6 +180,8 @@ apis:
   humanURL: https://developer.microsoft.com/en-us/graph
   baseURL: https://graph.microsoft.com/v1.0
   tags:
+  - Team
+  tags_raw:
   - Teams
   properties:
   - type: OpenAPI
