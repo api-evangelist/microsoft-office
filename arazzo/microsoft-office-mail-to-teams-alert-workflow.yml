@@ -12,8 +12,11 @@ info:
     can be read and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: microsoftGraphApi
-  url: ../openapi/microsoft-office-openapi.yml
+- name: mailApi
+  url: ../openapi/microsoft-office-mail-api-openapi.yml
+  type: openapi
+- name: teamsApi
+  url: ../openapi/microsoft-office-teams-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: mail-to-teams-alert

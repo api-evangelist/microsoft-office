@@ -12,8 +12,8 @@ info:
     opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: microsoftGraphApi
-  url: ../openapi/microsoft-office-openapi.yml
+- name: driveApi
+  url: ../openapi/microsoft-office-drive-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: drive-file-update-roundtrip
