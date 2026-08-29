@@ -5,6 +5,18 @@ description: >-
   providing programmatic access to Word, Excel, PowerPoint, Outlook,
   OneDrive, and Teams through Microsoft Graph and Office JavaScript APIs.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
