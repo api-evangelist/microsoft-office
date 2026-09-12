@@ -1,9 +1,6 @@
 aid: microsoft-office
 name: Microsoft Office
-description: >-
-  A collection of APIs for Microsoft Office applications and services,
-  providing programmatic access to Word, Excel, PowerPoint, Outlook,
-  OneDrive, and Teams through Microsoft Graph and Office JavaScript APIs.
+description: A collection of APIs for Microsoft Office applications and services, providing programmatic access to Word, Excel, PowerPoint, Outlook, OneDrive, and Teams through Microsoft Graph and Office JavaScript APIs.
 type: Index
 deliveryModel:
   model: saas
@@ -32,20 +29,19 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/microsoft-office.png
 tags:
-  - Collaboration
-  - Documents
-  - Microsoft
-  - Office
-  - Productivity
-url: https://raw.githubusercontent.com/api-evangelist/microsoft-office/refs/heads/main/apis.yml
+- Collaboration
+- Documents
+- Microsoft
+- Office
+- Productivity
+url: https://developer.microsoft.com/en-us/microsoft-365
 created: '2024-01-01'
 modified: '2026-06-20'
 specificationVersion: '0.23'
 apis:
 - aid: microsoft-office:word-api
   name: Word API
-  description: >-
-    API for interacting with Microsoft Word documents, including reading, writing, and formatting content.
+  description: API for interacting with Microsoft Word documents, including reading, writing, and formatting content.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://learn.microsoft.com/en-us/javascript/api/word
   baseURL: https://graph.microsoft.com/v1.0
@@ -55,8 +51,7 @@ apis:
   - Word Processing
   properties:
   - type: Documentation
-    url: >-
-      https://learn.microsoft.com/en-us/office/dev/add-ins/reference/overview/word-add-ins-reference-overview
+    url: https://learn.microsoft.com/en-us/office/dev/add-ins/reference/overview/word-add-ins-reference-overview
   - type: Reference
     url: https://learn.microsoft.com/en-us/javascript/api/word
 - aid: microsoft-office:excel-api
@@ -71,8 +66,7 @@ apis:
   - Spreadsheets
   properties:
   - type: Documentation
-    url: >-
-      https://learn.microsoft.com/en-us/office/dev/add-ins/reference/overview/excel-add-ins-reference-overview
+    url: https://learn.microsoft.com/en-us/office/dev/add-ins/reference/overview/excel-add-ins-reference-overview
   - type: Reference
     url: https://learn.microsoft.com/en-us/javascript/api/excel
 - aid: microsoft-office:powerpoint-api
@@ -87,8 +81,7 @@ apis:
   - Slides
   properties:
   - type: Documentation
-    url: >-
-      https://learn.microsoft.com/en-us/office/dev/add-ins/reference/overview/powerpoint-add-ins-reference-overview
+    url: https://learn.microsoft.com/en-us/office/dev/add-ins/reference/overview/powerpoint-add-ins-reference-overview
   - type: Reference
     url: https://learn.microsoft.com/en-us/javascript/api/powerpoint
 - aid: microsoft-office:outlook-mail-api
@@ -130,8 +123,7 @@ apis:
     url: https://learn.microsoft.com/en-us/onedrive/developer/
 - aid: microsoft-office:teams-api
   name: Teams API
-  description: >-
-    API for integrating with Microsoft Teams, including messaging, channels, and collaboration features.
+  description: API for integrating with Microsoft Teams, including messaging, channels, and collaboration features.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://learn.microsoft.com/en-us/graph/api/resources/teams-api-overview
   baseURL: https://graph.microsoft.com/v1.0
@@ -206,107 +198,120 @@ apis:
     url: https://azure.microsoft.com/en-us/pricing/details/active-directory/
   - type: SDKs
     url: https://learn.microsoft.com/en-us/graph/sdks/sdks-overview
-common:
-  - type: AgenticAccess
-    url: agentic-access/microsoft-office-agentic-access.yml
-  - type: Packages
-    url: packages/microsoft-office-packages.yml
-  - type: WellKnown
-    url: well-known/microsoft-office-well-known.yml
-  - type: MCPServer
-    url: mcp/microsoft-office-mcp.yml
-  - type: LLMsTxt
-    url: llms/microsoft-office-llms.txt
-  - type: Overlay
-    url: overlays/microsoft-office-openapi-overlay.yaml
-  - type: Conformance
-    url: conformance/microsoft-office-conformance.yml
-  - type: ErrorCatalog
-    url: errors/microsoft-office-problem-types.yml
-  - type: Lifecycle
-    url: lifecycle/microsoft-office-lifecycle.yml
-  - type: Conventions
-    url: conventions/microsoft-office-conventions.yml
-  - type: ChangeLog
-    url: changelog/microsoft-office-changelog.yml
-  - type: CLI
-    url: cli/microsoft-office-cli.yml
-  - type: Components
-    url: components/microsoft-office-components.yml
-  - type: DataModel
-    url: data-model/microsoft-office-data-model.yml
-  - type: Sandbox
-    url: sandbox/microsoft-office-sandbox.yml
-  - type: TrustCenter
-    url: security/microsoft-office-trust-center.yml
-  - type: VulnerabilityDisclosure
-    url: security/microsoft-office-vulnerability-disclosure.yml
-  - type: DomainSecurity
-    url: security/microsoft-office-domain-security.yml
-  - type: Authentication
-    url: authentication/microsoft-office-authentication.yml
-  - type: OAuthScopes
-    url: scopes/microsoft-office-scopes.yml
-  - type: Arazzo
-    url: arazzo/microsoft-office-mail-triage-and-respond-workflow.yml
-    name: Microsoft Office Triage Inbox Messages and Respond
-  - type: Arazzo
-    url: arazzo/microsoft-office-mail-folder-message-export-workflow.yml
-    name: Microsoft Office Inventory Mail Folders and Export Messages
-  - type: Arazzo
-    url: arazzo/microsoft-office-mail-to-teams-alert-workflow.yml
-    name: Microsoft Office Escalate an Inbox Message to a Teams Channel
-  - type: Arazzo
-    url: arazzo/microsoft-office-drive-file-discovery-download-workflow.yml
-    name: Microsoft Office Discover and Download a OneDrive File
-  - type: Arazzo
-    url: arazzo/microsoft-office-drive-file-update-roundtrip-workflow.yml
-    name: Microsoft Office Update a OneDrive File and Verify the Write
-  - type: Arazzo
-    url: arazzo/microsoft-office-drive-file-to-teams-notification-workflow.yml
-    name: Microsoft Office Announce a New OneDrive File in a Teams Channel
-  - type: Arazzo
-    url: arazzo/microsoft-office-teams-channel-provisioning-workflow.yml
-    name: Microsoft Office Provision a Teams Channel and Announce It
-  - type: Arazzo
-    url: arazzo/microsoft-office-teams-channel-message-digest-workflow.yml
-    name: Microsoft Office Build a Teams Channel Message Digest
-  - type: LinkedIn
-    url: https://www.linkedin.com/showcase/microsoft-365
-  - type: Portal
-    url: https://developer.microsoft.com/en-us/microsoft-365
-  - type: Website
-    url: https://www.microsoft.com/en-us/microsoft-365
+- name: Office Add-ins API
+  description: JavaScript API for building add-ins for Word, Excel, PowerPoint, and Outlook.
+  humanURL: https://docs.microsoft.com/en-us/office/dev/add-ins/
+  baseURL: https://appsforoffice.microsoft.com
+  tags:
+  - Add-Ins
+  - Extensions
+  - JavaScript
+  properties:
   - type: Documentation
-    url: https://learn.microsoft.com/en-us/office/dev/add-ins/
-  - type: Authentication
-    url: https://learn.microsoft.com/en-us/azure/active-directory/develop/
-  - type: Blog
-    url: https://developer.microsoft.com/en-us/microsoft-365/blogs/
-  - type: Support
-    url: https://learn.microsoft.com/en-us/answers/products/
-  - type: TermsOfService
-    url: https://www.microsoft.com/en-us/legal/terms-of-use
-  - type: PrivacyPolicy
-    url: https://privacy.microsoft.com/en-us/privacystatement
-  - type: StatusPage
-    url: https://status.dev.microsoft.com/
-  - type: GitHubOrganization
-    url: https://github.com/OfficeDev
-  - type: Integrations
-    url: https://www.microsoft.com/en-us/marketplace
+    url: https://docs.microsoft.com/en-us/office/dev/add-ins/overview/office-add-ins
+  - type: Reference
+    url: https://docs.microsoft.com/en-us/javascript/api/overview
+common:
+- type: AgenticAccess
+  url: agentic-access/microsoft-office-agentic-access.yml
+- type: Packages
+  url: packages/microsoft-office-packages.yml
+- type: WellKnown
+  url: well-known/microsoft-office-well-known.yml
+- type: MCPServer
+  url: mcp/microsoft-office-mcp.yml
+- type: LLMsTxt
+  url: llms/microsoft-office-llms.txt
+- type: Overlay
+  url: overlays/microsoft-office-openapi-overlay.yaml
+- type: Conformance
+  url: conformance/microsoft-office-conformance.yml
+- type: ErrorCatalog
+  url: errors/microsoft-office-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/microsoft-office-lifecycle.yml
+- type: Conventions
+  url: conventions/microsoft-office-conventions.yml
+- type: ChangeLog
+  url: changelog/microsoft-office-changelog.yml
+- type: CLI
+  url: cli/microsoft-office-cli.yml
+- type: Components
+  url: components/microsoft-office-components.yml
+- type: DataModel
+  url: data-model/microsoft-office-data-model.yml
+- type: Sandbox
+  url: sandbox/microsoft-office-sandbox.yml
+- type: TrustCenter
+  url: security/microsoft-office-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/microsoft-office-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/microsoft-office-domain-security.yml
+- type: Authentication
+  url: authentication/microsoft-office-authentication.yml
+- type: OAuthScopes
+  url: scopes/microsoft-office-scopes.yml
+- type: Arazzo
+  url: arazzo/microsoft-office-mail-triage-and-respond-workflow.yml
+  name: Microsoft Office Triage Inbox Messages and Respond
+- type: Arazzo
+  url: arazzo/microsoft-office-mail-folder-message-export-workflow.yml
+  name: Microsoft Office Inventory Mail Folders and Export Messages
+- type: Arazzo
+  url: arazzo/microsoft-office-mail-to-teams-alert-workflow.yml
+  name: Microsoft Office Escalate an Inbox Message to a Teams Channel
+- type: Arazzo
+  url: arazzo/microsoft-office-drive-file-discovery-download-workflow.yml
+  name: Microsoft Office Discover and Download a OneDrive File
+- type: Arazzo
+  url: arazzo/microsoft-office-drive-file-update-roundtrip-workflow.yml
+  name: Microsoft Office Update a OneDrive File and Verify the Write
+- type: Arazzo
+  url: arazzo/microsoft-office-drive-file-to-teams-notification-workflow.yml
+  name: Microsoft Office Announce a New OneDrive File in a Teams Channel
+- type: Arazzo
+  url: arazzo/microsoft-office-teams-channel-provisioning-workflow.yml
+  name: Microsoft Office Provision a Teams Channel and Announce It
+- type: Arazzo
+  url: arazzo/microsoft-office-teams-channel-message-digest-workflow.yml
+  name: Microsoft Office Build a Teams Channel Message Digest
+- type: LinkedIn
+  url: https://www.linkedin.com/showcase/microsoft-365
+- type: Portal
+  url: https://developer.microsoft.com/en-us/microsoft-365
+- type: Website
+  url: https://www.microsoft.com/en-us/microsoft-365
+- type: Documentation
+  url: https://learn.microsoft.com/en-us/office/dev/add-ins/
+- type: Authentication
+  url: https://learn.microsoft.com/en-us/azure/active-directory/develop/
+- type: Blog
+  url: https://developer.microsoft.com/en-us/microsoft-365/blogs/
+- type: Support
+  url: https://learn.microsoft.com/en-us/answers/products/
+- type: TermsOfService
+  url: https://www.microsoft.com/en-us/legal/terms-of-use
+- type: PrivacyPolicy
+  url: https://privacy.microsoft.com/en-us/privacystatement
+- type: StatusPage
+  url: https://status.dev.microsoft.com/
+- type: GitHubOrganization
+  url: https://github.com/OfficeDev
+- type: Integrations
+  url: https://www.microsoft.com/en-us/marketplace
 integrations:
-  - name: Microsoft
-  - name: Two people looking at a computer.
-  - name: This is placeholder text for
-  - name: IDC
-  - name: Nationwide
-  - name: RSA company
-  - name: Teleperformance
-  - name: A woman smiling at a laptop
-  - name: A man holding a laptop.
+- name: Microsoft
+- name: Two people looking at a computer.
+- name: This is placeholder text for
+- name: IDC
+- name: Nationwide
+- name: RSA company
+- name: Teleperformance
+- name: A woman smiling at a laptop
+- name: A man holding a laptop.
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
-x-parent: microsoft
+- FN: Kin Lane
+  email: kin@apievangelist.com
+x-parent: microsoft-365
 x-relationship: product
