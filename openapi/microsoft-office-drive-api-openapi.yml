@@ -105,13 +105,17 @@ paths:
                 $ref: '#/components/schemas/DriveItem'
 components:
   schemas:
-    DriveItemCollection:
+    Drive:
       type: object
       properties:
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/DriveItem'
+        id:
+          type: string
+        driveType:
+          type: string
+        owner:
+          type: object
+        quota:
+          type: object
     DriveItem:
       type: object
       properties:
@@ -131,17 +135,13 @@ components:
         lastModifiedDateTime:
           type: string
           format: date-time
-    Drive:
+    DriveItemCollection:
       type: object
       properties:
-        id:
-          type: string
-        driveType:
-          type: string
-        owner:
-          type: object
-        quota:
-          type: object
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/DriveItem'
   securitySchemes:
     oauth2:
       type: oauth2
