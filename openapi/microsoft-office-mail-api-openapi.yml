@@ -90,6 +90,32 @@ paths:
                 type: object
 components:
   schemas:
+    Message:
+      type: object
+      properties:
+        id:
+          type: string
+        subject:
+          type: string
+        bodyPreview:
+          type: string
+        from:
+          type: object
+          properties:
+            emailAddress:
+              type: object
+              properties:
+                name:
+                  type: string
+                address:
+                  type: string
+        toRecipients:
+          type: array
+          items:
+            type: object
+        receivedDateTime:
+          type: string
+          format: date-time
     SendMailRequest:
       type: object
       required:
@@ -131,32 +157,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Message'
-    Message:
-      type: object
-      properties:
-        id:
-          type: string
-        subject:
-          type: string
-        bodyPreview:
-          type: string
-        from:
-          type: object
-          properties:
-            emailAddress:
-              type: object
-              properties:
-                name:
-                  type: string
-                address:
-                  type: string
-        toRecipients:
-          type: array
-          items:
-            type: object
-        receivedDateTime:
-          type: string
-          format: date-time
   securitySchemes:
     oauth2:
       type: oauth2
