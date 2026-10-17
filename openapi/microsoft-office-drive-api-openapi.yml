@@ -124,13 +124,6 @@ components:
         lastModifiedDateTime:
           type: string
           format: date-time
-    DriveItemCollection:
-      type: object
-      properties:
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/DriveItem'
     Drive:
       type: object
       properties:
@@ -142,6 +135,13 @@ components:
           type: object
         quota:
           type: object
+    DriveItemCollection:
+      type: object
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/DriveItem'
   securitySchemes:
     oauth2:
       type: oauth2
