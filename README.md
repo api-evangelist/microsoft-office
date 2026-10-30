@@ -1,4 +1,4 @@
-# Microsoft Office (microsoft-office)
+# Microsoft Office
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,188 +66,166 @@
 
 A collection of APIs for Microsoft Office applications and services, providing programmatic access to Word, Excel, PowerPoint, Outlook, OneDrive, and Teams through Microsoft Graph and Office JavaScript APIs.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/microsoft-office/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/microsoft-office/refs/heads/main/apis.yml)
+**Areas:** Collaboration · Documents · Microsoft · Office · Productivity · Microsoft Office
 
-## Scope
+## Microsoft Office on APIs.io
 
-- **Type:** Index
+Everything profiled for Microsoft Office is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/microsoft-office/](https://apis.io/providers/microsoft-office/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (10)
 
-- Collaboration
-- Documents
-- Microsoft
-- Office
-- Productivity
+- [Word API](https://apis.io/apis/microsoft-office/word-api/) — API for interacting with Microsoft Word documents, including reading, writing, and formatting content.
+- [Excel API](https://apis.io/apis/microsoft-office/excel-api/) — API for working with Excel workbooks, worksheets, ranges, charts, and tables.
+- [PowerPoint API](https://apis.io/apis/microsoft-office/powerpoint-api/) — API for creating and manipulating PowerPoint presentations, slides, and content.
+- [Outlook Mail API](https://apis.io/apis/microsoft-office/outlook-mail-api/) — API for accessing and managing email, calendar, contacts, and tasks in Outlook.
+- [OneDrive API](https://apis.io/apis/microsoft-office/onedrive-api/) — API for accessing files and folders stored in OneDrive and SharePoint.
+- [Teams API](https://apis.io/apis/microsoft-office/teams-api/) — API for integrating with Microsoft Teams, including messaging, channels, and collaboration features.
+- [Microsoft Office Drive API](https://apis.io/apis/microsoft-office/microsoft-office-drive-api/) — The Drive API from Microsoft Office — 4 operation(s) for drive.
+- [Microsoft Office Mail API](https://apis.io/apis/microsoft-office/microsoft-office-mail-api/) — The Mail API from Microsoft Office — 4 operation(s) for mail.
+- [Microsoft Office Teams API](https://apis.io/apis/microsoft-office/microsoft-office-teams-api/) — The Teams API from Microsoft Office — 4 operation(s) for teams.
+- [Office Add-ins API](https://apis.io/apis/microsoft-office/office-add-ins-api/) — JavaScript API for building add-ins for Word, Excel, PowerPoint, and Outlook.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2024-01-01
-- **Modified:** 2026-04-28
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Arazzo workflows (8)
 
-### Microsoft Graph API
+Multi-step workflows that chain operations into a business task.
 
-Unified API endpoint for accessing Microsoft 365 services including Office applications, OneDrive, Outlook, and more.
+- [Microsoft Office Discover and Download a OneDrive File](https://apis.io/arazzos/microsoft-office/microsoft-office-drive-file-discovery-download-workflow/)
+- [Microsoft Office Announce a New OneDrive File in a Teams Channel](https://apis.io/arazzos/microsoft-office/microsoft-office-drive-file-to-teams-notification-workflow/)
+- [Microsoft Office Update a OneDrive File and Verify the Write](https://apis.io/arazzos/microsoft-office/microsoft-office-drive-file-update-roundtrip-workflow/)
+- [Microsoft Office Inventory Mail Folders and Export Messages](https://apis.io/arazzos/microsoft-office/microsoft-office-mail-folder-message-export-workflow/)
+- [Microsoft Office Escalate an Inbox Message to a Teams Channel](https://apis.io/arazzos/microsoft-office/microsoft-office-mail-to-teams-alert-workflow/)
+- [Microsoft Office Triage Inbox Messages and Respond](https://apis.io/arazzos/microsoft-office/microsoft-office-mail-triage-and-respond-workflow/)
+- [Microsoft Office Build a Teams Channel Message Digest](https://apis.io/arazzos/microsoft-office/microsoft-office-teams-channel-message-digest-workflow/)
+- [Microsoft Office Provision a Teams Channel and Announce It](https://apis.io/arazzos/microsoft-office/microsoft-office-teams-channel-provisioning-workflow/)
 
-- **Human URL:** [https://developer.microsoft.com/en-us/graph](https://developer.microsoft.com/en-us/graph)
-- **Base URL:** `https://graph.microsoft.com/v1.0`
+#### MCP servers (1)
 
-#### Tags
+Model Context Protocol servers that expose the API to agents.
 
-- Microsoft Graph
-- Office 365
-- Unified API
+- [Microsoft MCP Server for Enterprise](https://apis.io/servers/microsoft-office/microsoft-mcp-server-for-enterprise/)
 
-#### Properties
+#### Agentic access (1)
 
-- [Documentation](https://learn.microsoft.com/en-us/graph/overview)
-- [OpenAPI](https://raw.githubusercontent.com/microsoftgraph/microsoft-graph-openapi/master/openapi/v1.0/openapi.yaml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Authentication](https://learn.microsoft.com/en-us/graph/auth/)
-- [Pricing](https://azure.microsoft.com/en-us/pricing/details/active-directory/)
-- [S D Ks](https://learn.microsoft.com/en-us/graph/sdks/sdks-overview)
-- [Postman Collection](collections/microsoft-office.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/microsoft-office.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Which operations an agent can call, which act, and which need a human in the loop.
 
-### Word API
+- [Microsoft Office Agentic Access](https://apis.io/agentic-access/microsoft-office/microsoft-office-agentic-access/)
 
-API for interacting with Microsoft Word documents, including reading, writing, and formatting content.
+#### Collections (4)
 
-- **Human URL:** [https://learn.microsoft.com/en-us/javascript/api/word](https://learn.microsoft.com/en-us/javascript/api/word)
-- **Base URL:** `https://graph.microsoft.com/v1.0`
+Postman and Open Collection request collections.
 
-#### Tags
+- [Microsoft Graph API (Office 365 subset)](https://apis.io/collections/microsoft-office/open-microsoft-office/)
+- [Microsoft Graph API (Office 365 subset) Drive API](https://apis.io/collections/microsoft-office/open-microsoft-office-drive-api/)
+- [Microsoft Graph API (Office 365 subset) Drive Mail API](https://apis.io/collections/microsoft-office/open-microsoft-office-mail-api/)
+- [Microsoft Graph API (Office 365 subset) Drive Teams API](https://apis.io/collections/microsoft-office/open-microsoft-office-teams-api/)
 
-- Documents
-- Word
-- Word Processing
+#### Overlays (1)
 
-#### Properties
+OpenAPI overlays, including conversational phrasing for each operation.
 
-- [Documentation](https://learn.microsoft.com/en-us/office/dev/add-ins/reference/overview/word-add-ins-reference-overview)
-- [Reference](https://learn.microsoft.com/en-us/javascript/api/word)
-- [Postman Collection](collections/microsoft-office.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/microsoft-office.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Microsoft Office Openapi Overlay](https://apis.io/overlays/microsoft-office/microsoft-office-openapi-overlay/)
 
-### Excel API
+#### Security (4)
 
-API for working with Excel workbooks, worksheets, ranges, charts, and tables.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://learn.microsoft.com/en-us/javascript/api/excel](https://learn.microsoft.com/en-us/javascript/api/excel)
-- **Base URL:** `https://graph.microsoft.com/v1.0`
+- [Microsoft Office Authentication](https://apis.io/security/microsoft-office/microsoft-office-authentication/)
+- [Microsoft Office Domain Security](https://apis.io/security/microsoft-office/microsoft-office-domain-security/)
+- [Microsoft Office Trust Center](https://apis.io/security/microsoft-office/microsoft-office-trust-center/)
+- [Microsoft Office Vulnerability Disclosure](https://apis.io/security/microsoft-office/microsoft-office-vulnerability-disclosure/)
 
-#### Tags
+#### OAuth scopes (1)
 
-- Data Analysis
-- Excel
-- Spreadsheets
+The permissions the API asks for.
 
-#### Properties
+- [Microsoft Office Scopes](https://apis.io/scopes/microsoft-office/microsoft-office-scopes/)
 
-- [Documentation](https://learn.microsoft.com/en-us/office/dev/add-ins/reference/overview/excel-add-ins-reference-overview)
-- [Reference](https://learn.microsoft.com/en-us/javascript/api/excel)
-- [Postman Collection](collections/microsoft-office.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/microsoft-office.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Plans and pricing (1)
 
-### PowerPoint API
+Published plans, tiers and prices.
 
-API for creating and manipulating PowerPoint presentations, slides, and content.
+- [Microsoft Office Plans Pricing](https://apis.io/plans/microsoft-office/microsoft-office-plans-pricing/)
 
-- **Human URL:** [https://learn.microsoft.com/en-us/javascript/api/powerpoint](https://learn.microsoft.com/en-us/javascript/api/powerpoint)
-- **Base URL:** `https://graph.microsoft.com/v1.0`
+#### Rate limits (1)
 
-#### Tags
+Published request limits.
 
-- PowerPoint
-- Presentations
-- Slides
+- [Microsoft Office Rate Limits](https://apis.io/rate-limits/microsoft-office/microsoft-office-rate-limits/)
 
-#### Properties
+#### FinOps (1)
 
-- [Documentation](https://learn.microsoft.com/en-us/office/dev/add-ins/reference/overview/powerpoint-add-ins-reference-overview)
-- [Reference](https://learn.microsoft.com/en-us/javascript/api/powerpoint)
-- [Postman Collection](collections/microsoft-office.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/microsoft-office.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+What the API costs to run, by operation.
 
-### Outlook Mail API
+- [Microsoft Office Finops](https://apis.io/finops/microsoft-office/microsoft-office-finops/)
 
-API for accessing and managing email, calendar, contacts, and tasks in Outlook.
+## Where to find this API
 
-- **Human URL:** [https://learn.microsoft.com/en-us/graph/api/resources/mail-api-overview](https://learn.microsoft.com/en-us/graph/api/resources/mail-api-overview)
-- **Base URL:** `https://graph.microsoft.com/v1.0`
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-#### Tags
-
-- Calendar
-- Contacts
-- Email
-- Outlook
-
-#### Properties
-
-- [Documentation](https://learn.microsoft.com/en-us/graph/api/resources/mail-api-overview)
-- [Getting Started](https://learn.microsoft.com/en-us/graph/tutorials)
-- [Postman Collection](collections/microsoft-office.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/microsoft-office.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### OneDrive API
-
-API for accessing files and folders stored in OneDrive and SharePoint.
-
-- **Human URL:** [https://learn.microsoft.com/en-us/graph/api/resources/onedrive](https://learn.microsoft.com/en-us/graph/api/resources/onedrive)
-- **Base URL:** `https://graph.microsoft.com/v1.0`
-
-#### Tags
-
-- Cloud Storage
-- Files
-- OneDrive
-- Storage
-
-#### Properties
-
-- [Documentation](https://learn.microsoft.com/en-us/graph/api/resources/onedrive)
-- [Getting Started](https://learn.microsoft.com/en-us/onedrive/developer/)
-- [Postman Collection](collections/microsoft-office.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/microsoft-office.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Teams API
-
-API for integrating with Microsoft Teams, including messaging, channels, and collaboration features.
-
-- **Human URL:** [https://learn.microsoft.com/en-us/graph/api/resources/teams-api-overview](https://learn.microsoft.com/en-us/graph/api/resources/teams-api-overview)
-- **Base URL:** `https://graph.microsoft.com/v1.0`
-
-#### Tags
-
-- Chat
-- Collaboration
-- Meetings
-- Teams
-
-#### Properties
-
-- [Documentation](https://learn.microsoft.com/en-us/graph/api/resources/teams-api-overview)
-- [Postman Collection](collections/microsoft-office.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/microsoft-office.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [LinkedIn](https://www.linkedin.com/showcase/microsoft-365)
-- [Portal](https://developer.microsoft.com/en-us/microsoft-365)
 - [Website](https://www.microsoft.com/en-us/microsoft-365)
 - [Documentation](https://learn.microsoft.com/en-us/office/dev/add-ins/)
-- [Authentication](https://learn.microsoft.com/en-us/azure/active-directory/develop/)
-- [Blog](https://developer.microsoft.com/en-us/microsoft-365/blogs/)
 - [Support](https://learn.microsoft.com/en-us/answers/products/)
-- [Terms of Service](https://www.microsoft.com/en-us/legal/terms-of-use)
-- [Privacy Policy](https://privacy.microsoft.com/en-us/privacystatement)
-- [Status Page](https://status.dev.microsoft.com/)
-- [GitHub Organization](https://github.com/OfficeDev)
-- [Integrations](https://www.microsoft.com/en-us/marketplace)
+- [Blog](https://developer.microsoft.com/en-us/microsoft-365/blogs/)
+- [Terms of service](https://www.microsoft.com/en-us/legal/terms-of-use)
+- [Privacy policy](https://privacy.microsoft.com/en-us/privacystatement)
+- [GitHub](https://github.com/OfficeDev)
+- [Status](https://status.dev.microsoft.com/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 54.7** — strong · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 80.0 |
+| Contract quality | 45.6 |
+| Contract governance | 4.5 |
+| Operational transparency | 44.7 |
+| Developer ergonomics | 78.6 |
+| Access clarity | 47.4 |
+
+**Agent readiness 31.8** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | documented (partial credit) |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | documented (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 45.1** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/microsoft-office/](https://apis.io/providers/microsoft-office/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Microsoft Office: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/microsoft-office/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
